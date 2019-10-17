@@ -135,16 +135,17 @@ void InternationalStudent::setHomeCountry(string newHomeCountry){
 }
 ToeflScore InternationalStudent::getToeflScore() {
 	ToeflScore test;
-	test.setReading(toeflScore.getReading);
-	test.setListening(toeflScore.getListening);
-	test.setSpeaking(toeflScore.getSpeaking);
-	test.setWriting(toeflScore.getWriting);
+	test.setReading(toeflScore.getReading());
+	test.setListening(toeflScore.getListening());
+	test.setSpeaking(toeflScore.getSpeaking());
+	test.setWriting(toeflScore.getWriting());
+	return test;
 }
 void InternationalStudent::setToeflScore(ToeflScore test) {
-	toeflScore.setReading(test.getReading);
-	toeflScore.setListening(test.getListening);
-	toeflScore.setSpeaking(test.getSpeaking);
-	toeflScore.setWriting(test.getWriting);
+	toeflScore.setReading(test.getReading());
+	toeflScore.setListening(test.getListening());
+	toeflScore.setSpeaking(test.getSpeaking());
+	toeflScore.setWriting(test.getWriting());
 }
 void InternationalStudent::setToeflScore(int reading, int listening, int speaking, int writing) {
 	toeflScore.setReading(reading);
