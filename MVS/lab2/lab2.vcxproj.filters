@@ -15,47 +15,35 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\lab2\domestic-stu.txt">
-      <Filter>Source Files</Filter>
-    </Text>
-    <Text Include="..\..\lab2\international-stu.txt">
-      <Filter>Source Files</Filter>
-    </Text>
-    <Text Include="domestic-stu.txt">
-      <Filter>Source Files</Filter>
-    </Text>
-    <Text Include="international-stu.txt">
-      <Filter>Source Files</Filter>
-    </Text>
+    <Text Include="domestic-stu.txt" />
+    <Text Include="international-stu.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lab2\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lab2\sfuSort.cpp">
+    <ClCompile Include="sfuSort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lab2\student.cpp">
+    <ClCompile Include="student.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lab2\toeflScore.cpp">
+    <ClCompile Include="toeflScore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\lab2\Makefile">
-      <Filter>Source Files</Filter>
-    </None>
+    <None Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\lab2\sfuSort.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="sfuSort.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lab2\student.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="student.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lab2\toeflScore.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="toeflScore.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

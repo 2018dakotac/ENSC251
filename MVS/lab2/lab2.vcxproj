@@ -18,6 +18,24 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="domestic-stu.txt" />
+    <Text Include="international-stu.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="sfuSort.cpp" />
+    <ClCompile Include="student.cpp" />
+    <ClCompile Include="toeflScore.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sfuSort.h" />
+    <ClInclude Include="student.hpp" />
+    <ClInclude Include="toeflScore.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{6965BF09-945F-4A5B-9012-F3BFB6427C1D}</ProjectGuid>
@@ -114,26 +132,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <Text Include="..\..\lab2\domestic-stu.txt" />
-    <Text Include="..\..\lab2\international-stu.txt" />
-    <Text Include="domestic-stu.txt" />
-    <Text Include="international-stu.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\lab2\main.cpp" />
-    <ClCompile Include="..\..\lab2\sfuSort.cpp" />
-    <ClCompile Include="..\..\lab2\student.cpp" />
-    <ClCompile Include="..\..\lab2\toeflScore.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\lab2\Makefile" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\lab2\sfuSort.h" />
-    <ClInclude Include="..\..\lab2\student.hpp" />
-    <ClInclude Include="..\..\lab2\toeflScore.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
