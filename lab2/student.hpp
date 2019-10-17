@@ -1,5 +1,7 @@
 //header file student.hpp to declare your classes
-#pragma once
+#ifndef STUDENT_HPP
+#define STUDENT_HPP
+
 #include <string> //you will have to use string in C++
 #include <iostream>
 #include <iomanip>
@@ -11,11 +13,11 @@ class Student
 	public:
 		
 		//initializing get functions
-		string getFirstName();
-		string getLastName();
-		float getCGPA();
-		int getrScore();
-		int getAppID();
+		string getFirstName()const;
+		string getLastName()const;
+		float getCGPA()const;
+		int getrScore()const;
+		int getAppID()const;
 		//initializing set functions
 		void setFirstName(string firstName);
 		void setLastName(string lastName);
@@ -49,7 +51,7 @@ class DomesticStudent : public Student
 {
 	public:
 		//initializing domestic get and set functions
-		string getProvince();
+		string getProvince()const;
 		void  setProvince(string province);
 		//friend function for comparing province
 		friend int compareProvince(DomesticStudent student1, DomesticStudent student2);
@@ -65,14 +67,14 @@ class InternationalStudent : public Student
 	public:
 
 		//initializing international get and set functions
-		string getHomeCountry();
+		string getHomeCountry()const;
 		
-		ToeflScore getToeflScore();
-		int getReading();
-		int getListening(); 
-		int getSpeaking(); 
-		int getWriting(); 
-		int getScoreSum();
+		ToeflScore getToeflScore()const;
+		int getReading()const;
+		int getListening()const; 
+		int getSpeaking()const; 
+		int getWriting()const; 
+		int getScoreSum()const;
 		//set
 		void setHomeCountry(string homeCountry);
 		void setToeflScore(ToeflScore newToeflScore);//sets toeflscore member to new toeflscore
@@ -93,4 +95,4 @@ class InternationalStudent : public Student
 		string homeCountry;
 		ToeflScore toeflScore;
 };
-
+#endif // !STUDENT_HPP

@@ -6,37 +6,37 @@ using namespace std;
 
 
 //Defining Student get and set functions
-string Student::getFirstName(){
+string Student::getFirstName()const{
     return firstName;
 }
 void Student::setFirstName(string newFirstName){
     firstName = newFirstName;
 }
-string Student::getLastName(){
+string Student::getLastName()const{
     return lastName;
 }
 void Student::setLastName(string newLastName){
     lastName = newLastName;
 }
-float Student::getCGPA(){
+float Student::getCGPA()const{
     return CGPA;
 }
 void Student::setCGPA(float newCGPA){
     CGPA = newCGPA;
 }
-int Student::getrScore(){
+int Student::getrScore()const{
     return rScore;
 }
 void Student::setrScore(int newrScore){
     rScore = newrScore;
 }
-int Student::getAppID(){
+int Student::getAppID()const{
     return AppID;
 }
 void Student::setAppID(int newAppID){
 	AppID = newAppID;
 }
-ostream& operator << (ostream& outs, DomesticStudent &object)
+ostream& operator << (ostream& outs, const DomesticStudent &object)
 {
 	outs << setw(14) << left << object.getFirstName() << " " << setw(18) << left << object.getLastName();
 	outs << setw(10) << left << object.getProvince();
@@ -110,7 +110,7 @@ int compareLastName(Student student1, Student student2){
 
 
 //defining all domestic student functions
-string DomesticStudent::getProvince(){
+string DomesticStudent::getProvince()const{
     return province;
 }
 void DomesticStudent::setProvince(string newProvince) {
@@ -127,13 +127,13 @@ int compareProvince(DomesticStudent student1, DomesticStudent student2) {
 
 
 //all international student functions
-string InternationalStudent::getHomeCountry(){
+string InternationalStudent::getHomeCountry()const{
     return homeCountry;
 }
 void InternationalStudent::setHomeCountry(string newHomeCountry){
     homeCountry = newHomeCountry;
 }
-ToeflScore InternationalStudent::getToeflScore() {
+ToeflScore InternationalStudent::getToeflScore() const{
 	ToeflScore test;
 	test.setReading(toeflScore.getReading());
 	test.setListening(toeflScore.getListening());
@@ -154,31 +154,31 @@ void InternationalStudent::setToeflScore(int reading, int listening, int speakin
 	toeflScore.setWriting(writing);
 
 }
-int InternationalStudent::getReading() {
+int InternationalStudent::getReading() const{
 	return toeflScore.getReading();
 }
 void InternationalStudent::setReading(int reading) {
 	toeflScore.setReading(reading);
 }
-int InternationalStudent::getListening() {
+int InternationalStudent::getListening() const{
 	return toeflScore.getListening();
 }
 void InternationalStudent::setListening(int listening) {
 	toeflScore.setListening(listening);
 }
-int InternationalStudent::getSpeaking() {
+int InternationalStudent::getSpeaking() const{
 	return toeflScore.getSpeaking();
 }
 void InternationalStudent::setSpeaking(int speaking) {
 	toeflScore.setSpeaking(speaking);
 }
-int InternationalStudent::getWriting() {
+int InternationalStudent::getWriting() const{
 	return toeflScore.getWriting();
 }
 void InternationalStudent::setWriting(int writing) {
 	toeflScore.setWriting(writing);
 }
-int InternationalStudent::getScoreSum(){
+int InternationalStudent::getScoreSum() const{
 	int sum = 0;
 	sum = sum + toeflScore.getReading();
 	sum = sum + toeflScore.getListening();
@@ -186,7 +186,7 @@ int InternationalStudent::getScoreSum(){
 	sum = sum + toeflScore.getWriting();
     return sum;
 }
-ostream& operator << (ostream& outs, InternationalStudent &object)
+ostream& operator << (ostream& outs, const InternationalStudent &object)
 {
 	outs << setw(14) << left << object.getFirstName() << " " << setw(18) << left << object.getLastName();
 	outs << setw(10) << left << object.getHomeCountry();

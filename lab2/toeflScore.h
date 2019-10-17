@@ -1,14 +1,15 @@
-#pragma once
+#ifndef TOEFLSCORE_HPP
+#define TOEFLSCORE_HPP
 using namespace std;
 class ToeflScore {
 public:
 
 	//initializing get functions
-	int getReading();
-	int getListening();
-	int getSpeaking();
-	int getWriting();
-	int getScoreSum();//returns total ToeflScore
+	int getReading()const;
+	int getListening()const;
+	int getSpeaking()const;
+	int getWriting()const;
+	int getScoreSum()const;//returns total ToeflScore
 
 	//initializing set functions
 	void setReading(int reading);
@@ -25,3 +26,5 @@ private:
 	int writing;
 	int scoreSum; //0-120
 };
+
+#endif
