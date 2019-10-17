@@ -66,6 +66,7 @@ Student::Student() {
 	lastName = "";
 	CGPA = 0;
 	rScore = 0;
+	AppID = 0;
 }
 
 //common functions for Domestic and International student
