@@ -1,7 +1,9 @@
 //student.cpp to implement your classes
 #include <string>
 #include <iostream>
+//#include <cstdlib>
 #include "student.hpp"
+#include "toeflScore.h"
 using namespace std;
 
 
@@ -89,20 +91,44 @@ int compareTwoStrings(string s1, string s2){
 	return s1.compare(s2);
 }
 //Friend Functions of student class
-int compareCGPA(Student student1, Student student2){
-	return compareTwoFloats(student1.CGPA, student2.CGPA);
+int compareCGPA(const Student &student1, const Student &student2){
+	if (student1.CGPA == student2.CGPA)
+	{
+		return 0;
+	}
+	else if (student1.CGPA > student2.CGPA)
+	{
+		return 1;
+	}
+	else
+	{
+		return -1;
+	}
+	//return compareTwoFloats(student1.getCGPA(), student2.getCGPA());
 }
 
-int compareResearchScore(Student student1, Student student2){
-	return compareTwoInts(student1.rScore, student2.rScore);
+int compareResearchScore(const Student &student1, const Student &student2){
+	if (student1.rScore == student2.rScore)
+	{
+		return 0;
+	}
+	else if (student1.rScore > student2.rScore)
+	{
+		return 1;
+	}
+	else
+	{
+		return -1;
+	}
+	//return compareTwoInts(student1.getrScore(), student2.getrScore());
 }
 
-int compareFirstName(Student student1, Student student2){
-	return compareTwoStrings(student1.firstName, student2.firstName);
+int compareFirstName(const Student &student1, const Student &student2){
+	return (student2.firstName).compare(student1.firstName);
 }
 
-int compareLastName(Student student1, Student student2){
-	return compareTwoStrings(student1.lastName, student2.lastName);
+int compareLastName(const Student &student1, const Student &student2){
+	return (student2.lastName).compare(student1.lastName);
 }
 
 
@@ -121,8 +147,8 @@ DomesticStudent::DomesticStudent() {
 	province = "";
 }
 //Friend Function for domestic student
-int compareProvince(DomesticStudent student1, DomesticStudent student2) {
-	return compareTwoStrings(student1.province, student2.province);
+int compareProvince(const DomesticStudent& student1,const DomesticStudent &student2) {
+	return (student1.province).compare(student2.province);
 }
 
 
@@ -227,10 +253,10 @@ istream& operator >> (istream &ins, InternationalStudent &object)
 //constructor
 InternationalStudent::InternationalStudent() {
 	homeCountry = "";
-}
+	}
 //Friend Function
-int compareCountry(InternationalStudent student1, InternationalStudent student2) {
-	return compareTwoStrings(student1.homeCountry, student2.homeCountry);
+int compareCountry(const InternationalStudent &student1,const InternationalStudent &student2) {
+	return (student2.homeCountry).compare(student1.homeCountry);
 }
 
 

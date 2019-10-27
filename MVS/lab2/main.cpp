@@ -26,7 +26,7 @@ int main() {
 	}
 
 	//get number of lines in each file and then resets position in the file
-	int domesticLineNum = -1;
+	int domesticLineNum = 0;
 	while (getline(domesticFile, line))
 	{
 		domesticLineNum++;
@@ -34,7 +34,7 @@ int main() {
 	domesticFile.clear();
 	domesticFile.seekg(0, ios::beg);
 
-	int internationalLineNum = -1;
+	int internationalLineNum = 0;
 	while (getline(internationalFile, line))
 	{
 		internationalLineNum++;
@@ -47,21 +47,30 @@ int main() {
 	cout << "Which group would you like to sort?\nInput 'D' for Domestic Students, 'I' for International Students, or 'A' for all students.\n ";
 	cin >> groupSelection;
 	//For not overall we must know type of sorting
-	if (groupSelection != "O") {
+	if (groupSelection != "A") {
 		cout << "Enter what you would like to sort by: 'F' First Name, 'L' Last Name, 'C' Country, 'R' Research Score, 'P' Province, 'Z' Country\n";
 		cin >> sortType;
 	}
+	
+	getline(domesticFile, line);
+	cout << "File format of domestic file: " << line << endl;
+	getline(internationalFile, line);
+	cout << "File format of international file: " << line << endl;
+	
 	if (groupSelection == "D") {
 		//sort domestic based on sortType
 		//declare some dynamic memory to the number of students in the file
-		DomesticStudent *DomesticStudents = new DomesticStudent[domesticLineNum];
+		DomesticStudent *DomesticStudents = new DomesticStudent[domesticLineNum-1];
 		int i = 0;
-		while (getline(domesticFile, line)) {
+		while (getline(domesticFile,line)) {
 			istringstream ss(line);
-			ss >> DomesticStudents[i++];//uses user defined >> operator to pass information
+			ss >> DomesticStudents[i];//uses user defined >> operator to pass information
+			cout << DomesticStudents[i];
+			i++;
 		}
-		if (groupSelection == "O") {
-			sortType == "RGP";//sorts by research score than cgpa then province
+		cout << "test1";
+		if (groupSelection == "A") {
+			sortType = "RGP";//sorts by research score than cgpa then province
 		}
 		sortBy(DomesticStudents, domesticLineNum, sortType);
 		//print results
@@ -74,21 +83,23 @@ int main() {
 		delete[] DomesticStudents;
 	}
 
-	if (groupSelection == "I" || groupSelection == "O") {
+	if (groupSelection == "I" || groupSelection == "A") {
 		InternationalStudent *InternationalStudents = new InternationalStudent[internationalLineNum];
 		InternationalStudent *filteredInternationalStudents = new InternationalStudent[internationalLineNum];
 		int i = 0;
 		while (getline(internationalFile, line)) {
 			istringstream ss(line);
-			ss >> InternationalStudents[i++];
+			ss >> InternationalStudents[i];
+			cout << InternationalStudents[i];
+			i++;
 		}
 		//if overall sorting, gpa, rscore,province
-		if (groupSelection == "O") {
+		if (groupSelection == "A") {
 			sortType = "RGC";//sorts by research score than cgpa then country
 			sortBy(InternationalStudents, internationalLineNum, sortType);
 			//filter out the internation students below toefl score threshold ONLY FOR OVERAL SORT
 			int filteredIndex = 0;
-			if (groupSelection == "0") {
+			if (groupSelection == "A") {
 				for (int j = 0; j < internationalLineNum; j++) {
 					if (InternationalStudents[j].getScoreSum() >= 93
 						&& InternationalStudents[j].getReading() >= 20
@@ -111,9 +122,7 @@ int main() {
 			}
 			//cleanup
 			internationalFile.close();
-			if (filteredInternationalStudents != InternationalStudents) {
-				delete[] filteredInternationalStudents;
-			}
+			delete[] filteredInternationalStudents;
 			delete[] InternationalStudents;
 		}
 		return 0;

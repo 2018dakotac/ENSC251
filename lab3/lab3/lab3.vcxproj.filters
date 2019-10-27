@@ -29,9 +29,27 @@
     <ClCompile Include="student.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="domesticStudent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="internationalStudent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="toelfScore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="student.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="domesticStudent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="internationalStudent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="toeflScore.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

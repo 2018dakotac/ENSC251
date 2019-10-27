@@ -5,6 +5,7 @@
 #include <string> //you will have to use string in C++
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
 #include "toeflScore.h"
 using namespace std; //use namespace std
 
@@ -26,10 +27,10 @@ class Student
 		void setAppID(int AppID);
 	
 		//initializing friend functions
-		friend int compareCGPA(Student student1, Student student2);
-		friend int compareResearchScore(Student student1, Student student2);
-		friend int compareFirstName(Student student1, Student student2);
-		friend int compareLastName(Student student1, Student student2);
+		friend int compareCGPA(const Student &student1, const Student &student2);
+		friend int compareResearchScore(const Student &student1, const Student &student2);
+		friend int compareFirstName(const Student &student1, const Student &student2);
+		friend int compareLastName(const Student &student1, const Student &student2);
 		Student();
 
 	private:
@@ -54,8 +55,8 @@ class DomesticStudent : public Student
 		string getProvince()const;
 		void  setProvince(string province);
 		//friend function for comparing province
-		friend int compareProvince(DomesticStudent student1, DomesticStudent student2);
-		friend ostream& operator << (ostream& outs, const DomesticStudent &object);
+		friend int compareProvince(const DomesticStudent &student1, const DomesticStudent &student2);
+		friend ostream& operator << (ostream& outs, const DomesticStudent& object);
 		friend istream& operator >> (istream &ins, DomesticStudent &object);
 		DomesticStudent();
 	private:
@@ -86,8 +87,8 @@ class InternationalStudent : public Student
 		InternationalStudent();
 		
 		//friend function for comparing Country
-		friend int compareCountry(InternationalStudent student1, InternationalStudent student2);
-		friend ostream& operator << (ostream& outs, const InternationalStudent &object);
+		friend int compareCountry(const InternationalStudent &student1, const InternationalStudent &student2);
+		friend ostream& operator << (ostream& outs, const InternationalStudent& object);
 		friend istream& operator >> (istream &ins, InternationalStudent &object);
 		
 		

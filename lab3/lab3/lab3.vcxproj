@@ -23,11 +23,17 @@
     <Text Include="international-stu.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="domesticStudent.cpp" />
+    <ClCompile Include="internationalStudent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="student.cpp" />
+    <ClCompile Include="toelfScore.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="domesticStudent.hpp" />
+    <ClInclude Include="internationalStudent.hpp" />
     <ClInclude Include="student.hpp" />
+    <ClInclude Include="toeflScore.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -8,7 +8,10 @@
 #include <fstream> //file processing
 #include <sstream> //formatted string processing
 #include <cstdlib> //atof and atoi
-#include "student.hpp" //header file for the Student, InternationalStudent, DomesticStudent, and ToeflScore classes
+#include "student.hpp" //header files
+#include "domesticStudent.hpp"
+#include "internationalStudent.hpp"
+#include "toeflScore.hpp"
 #include <string>
 #include <iomanip>
 
