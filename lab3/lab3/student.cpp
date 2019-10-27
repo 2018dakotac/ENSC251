@@ -1,5 +1,5 @@
-//Luka Cuk and Ritesh Nandakumar
-//ENSC 251 Assignment 1
+//Dakota Crozier and Colin Buchko
+//ENSC 251 Assignment 
 //
 //student.cpp to define our classes, including member functions like an error check
 //and constructors
@@ -36,6 +36,8 @@ Student::Student()
 	cgpa = 0.00;
 	researchscore = 0;
 	appID = 20200000;
+	head = NULL;
+	tail = NULL;
 }
 
 //student error checking function to make sure the cgpa is not less than 0 or greater than

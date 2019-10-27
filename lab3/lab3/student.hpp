@@ -96,6 +96,8 @@ private:
 	float cgpa;
 	int researchscore;
 	int appID;
+	Student *head;
+	Student *tail;
 };
 
 

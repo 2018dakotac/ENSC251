@@ -15,6 +15,22 @@
 #include <string>
 #include <iomanip>
 
+
+//TODO: finish cleaning up this awful main function, first consolidate domestic sorting functions into 1(see commented old code below), then copy it and make it international
+//clean up international calls 
+// dont deal with overall sort, look into assignment again see if its still needed decide if you should try making linked list and testing before worrying about overal sort 
+// have already defined some pointers in the main student class that should be able to be used by domestic and international
+void sortDomCGPA(int stu_count1, DomesticStudent *Student1);
+void sortDomResearchScore(int stu_count1, DomesticStudent *Student1);
+void sortDomFirstName(int stu_count1, DomesticStudent *Student1);
+void sortDomLastName(int stu_count1, DomesticStudent *Student1);
+void sortDomProvince(int stu_count1, DomesticStudent *Student1);
+//void singleSort(DomesticStudent* DomesticStudents, int num, char type);
+//void singleSort(InternationalStudent* InternationalStudents, int num, char type);
+//void sortBy(DomesticStudent* DomesticStudents, int num, string type);
+//void sortBy(InternationalStudent* InternationalStudents, int num, string type);
+
+
 int main() {
 
 	//DOMESTIC STUDENT reading file and outputting
@@ -42,12 +58,14 @@ int main() {
 	//for going thru the while loop when reading the file, counting how many entries are made
 	int stu_count1 = 0;
 
+	//creating pointer to dynamic array of domestic student objects, intially allocating 100 spaces
+	DomesticStudent *Domestic = new DomesticStudent[100];
+
 	//formatting the output for reading the file, with headers for each category at the top
 	cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
 		<< setw(20) << left << "Research Score" << setw(20) << left << "CGPA" << setw(20) << left << "Province" << endl;
 
-	//creating pointer to dynamic array of domestic student objects, intially allocating 100 spaces
-	DomesticStudent *Domestic = new DomesticStudent[100];
+	
 
 
 	while (getline(domesticFile, line)) {
@@ -251,6 +269,7 @@ int main() {
 					if (sorting == 'C' || sorting == 'c')
 					{
 						//selection sort algorithm, compare one element to all others in array, reducing comparison size till get to last element
+						/*
 						for (int i = 0; i < stu_count1 - 1; i++)
 						{
 							for (int j = i + 1; j < stu_count1; j++)
@@ -266,12 +285,16 @@ int main() {
 							}
 						}
 						break;
+						*/
+						sortDomCGPA(stu_count1, Domestic);
+						break;
 					}
 
 					//research score sort from highest to lowest
 					else if (sorting == 'R' || sorting == 'r')
 					{
-
+						sortDomResearchScore(stu_count1, Domestic);
+						/*
 						//selection sort algorithm
 						for (int i = 0; i < stu_count1 - 1; i++)
 						{
@@ -287,12 +310,14 @@ int main() {
 								}
 							}
 						}
+						*/
 						break;
 					}
 
 					//first name sort in alphabetical order from A-Z
 					else if (sorting == 'F' || sorting == 'f')
 					{
+						/*
 						//selection sort algorithm
 						for (int i = 0; i < stu_count1 - 1; i++)
 						{
@@ -308,12 +333,15 @@ int main() {
 								}
 							}
 						}
+						*/
+						sortDomFirstName(stu_count1, Domestic);
 						break;
 					}
 
 					//last name sort in alphabetical order from A-Z
 					else if (sorting == 'L' || sorting == 'l')
 					{
+						/*
 						//selection sort algorithm
 						for (int i = 0; i < stu_count1 - 1; i++)
 						{
@@ -329,12 +357,15 @@ int main() {
 								}
 							}
 						}
+						*/
+						sortDomLastName(stu_count1, Domestic);
 						break;
 					}
 
 					//province sort in alphabetical order from A-Z
 					else if (sorting == 'P' || sorting == 'p')
 					{
+						/*
 						//selection sort algorithm
 						for (int i = 0; i < stu_count1 - 1; i++)
 						{
@@ -350,6 +381,8 @@ int main() {
 								}
 							}
 						}
+						*/
+						sortDomProvince(stu_count1, Domestic);
 						break;
 					}
 
@@ -806,7 +839,7 @@ int main() {
 			cout << "Invalid entry. Outputting current sort " << endl;
 			break;
 		}
-	}
+	} 
 
 	//delete allocated memory for the domestic and international arrays
 	delete[] Domestic;
@@ -816,3 +849,160 @@ int main() {
 
 	return 0;
 }
+
+void sortDomCGPA(int stu_count1, DomesticStudent *Student1) {
+	
+		//selection sort algorithm, compare one element to all others in array, reducing comparison size till get to last element
+		for (int i = 0; i < stu_count1 - 1; i++)
+		{
+			for (int j = i + 1; j < stu_count1; j++)
+			{
+				//if j element is larger
+				if (compareCGPA(Student1[i], Student1[j]) == -1)
+				{
+					DomesticStudent tempD;
+					//swap elements using overloaded assingment operator
+					tempD = Student1[i];//use temp to swap
+					Student1[i] = Student1[j];
+					Student1[j] = tempD;
+				}
+			}
+		}
+}
+void sortDomResearchScore(int stu_count1, DomesticStudent *Student1) {
+	//selection sort algorithm
+	for (int i = 0; i < stu_count1 - 1; i++)
+	{
+		for (int j = i + 1; j < stu_count1; j++)
+		{
+			//if j element research score is larger, swap 
+			if (compareResearchScore(Student1[i], Student1[j]) == -1)
+			{
+				DomesticStudent tempD;
+				//swap elements using overloaded assignment operator
+				tempD = Student1[i];//use temp to swap
+				Student1[i] = Student1[j];
+				Student1[j] = tempD;
+			}
+		}
+	}
+}
+void sortDomFirstName(int stu_count1, DomesticStudent *Student1) {
+	//selection sort algorithm
+	for (int i = 0; i < stu_count1 - 1; i++)
+	{
+		for (int j = i + 1; j < stu_count1; j++)
+		{
+			//if j element research score is larger, swap 
+			if (compareFirstName(Student1[i], Student1[j]) == -1)
+			{
+				DomesticStudent tempD;
+				//swap elements using overloaded assignment operator
+				tempD = Student1[i];//use temp to swap
+				Student1[i] = Student1[j];
+				Student1[j] = tempD;
+			}
+		}
+	}
+}
+void sortDomLastName(int stu_count1, DomesticStudent *Student1) {
+	//selection sort algorithm
+	for (int i = 0; i < stu_count1 - 1; i++)
+	{
+		for (int j = i + 1; j < stu_count1; j++)
+		{
+			//if j element research score is larger, swap 
+			if (compareLastName(Student1[i], Student1[j]) == -1)
+			{
+				DomesticStudent tempD;
+				//swap elements using overloaded assignment operator
+				tempD = Student1[i];//use temp to swap
+				Student1[i] = Student1[j];
+				Student1[j] = tempD;
+			}
+		}
+	}
+}
+void sortDomProvince(int stu_count1, DomesticStudent *Student1) {
+	//selection sort algorithm
+	for (int i = 0; i < stu_count1 - 1; i++)
+	{
+		for (int j = i + 1; j < stu_count1; j++)
+		{
+			//if j element research score is larger, swap 
+			if (compareProvince(Student1[i], Student1[j]) == -1)
+			{
+				DomesticStudent tempD;
+				//swap elements using overloaded assignment operator
+				tempD = Student1[i];//use temp to swap
+				Student1[i] = Student1[j];
+				Student1[j] = tempD;
+			}
+		}
+	}
+}
+/*
+void singleSort(DomesticStudent* DomesticStudents, int num, char type)
+{
+
+	// if the type is not specifically "ascending", then sort in descending order
+
+	// implement bubble sort algorithm
+	for (int i = 0; i < num-1; i++)
+	{
+		for (int j = i+1; j < num; j++)
+		{
+			if ((type == 'F') && (compareFirstName(DomesticStudents[j], DomesticStudents[j + 1]))
+				|| (type == 'L') && (compareLastName(DomesticStudents[j], DomesticStudents[j + 1]))
+				|| (type == 'C') && (compareCGPA(DomesticStudents[j], DomesticStudents[j + 1]))
+				|| (type == 'R') && (compareResearchScore(DomesticStudents[j], DomesticStudents[j + 1]))
+				|| (type == 'P') && (compareProvince(DomesticStudents[j], DomesticStudents[j + 1])))
+			{
+				DomesticStudent tmpStudent;
+				tmpStudent = DomesticStudents[j];
+				DomesticStudents[j] = DomesticStudents[j + 1];
+				DomesticStudents[j + 1] = tmpStudent;
+			}
+		}
+	}
+}
+
+void singleSort(InternationalStudent* InternationalStudents, int num, char type)
+{
+	// implement bubble sort algorithm
+	for (int i = 0; i < num-1; i++)
+	{
+		for (int j = 0; j < num - 1; j++)
+		{
+			if ((type == 'F') && (compareFirstName(InternationalStudents[j], InternationalStudents[j + 1])
+				|| (type == 'L') && (compareLastName(InternationalStudents[j], InternationalStudents[j + 1])))
+				|| (type == 'C') && (compareCGPA(InternationalStudents[j], InternationalStudents[j + 1]))
+				|| (type == 'R') && (compareResearchScore(InternationalStudents[j], InternationalStudents[j + 1]))
+				|| (type == 'Z') && (compareCountry(InternationalStudents[j], InternationalStudents[j + 1])))
+			{
+				InternationalStudent tmpStudent;
+				tmpStudent = InternationalStudents[j];
+				InternationalStudents[j] = InternationalStudents[j + 1];
+				InternationalStudents[j + 1] = tmpStudent;
+			}
+		}
+	}
+}
+
+void sortBy(DomesticStudent* DomesticStudents, int num, string type)
+{
+	for (int i = 0; i < type.size(); i++) {
+		cout << type[i];
+		singleSort(DomesticStudents, num, type[i]);
+	}
+}
+
+void sortBy(InternationalStudent* InternationalStudents, int num, string type)
+{
+	for (int i = 0; i < type.size(); i++) {
+		singleSort(InternationalStudents, num, type[i]);
+	}
+}
+*/
+
+
