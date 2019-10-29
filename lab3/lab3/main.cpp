@@ -15,12 +15,7 @@
 #include <string>
 #include <iomanip>
 
-
-//TODO: finish cleaning up this awful main function, first consolidate domestic sorting functions into 1(see commented old code below), then copy it and make it international
-//clean up international calls 
-// dont deal with overall sort, look into assignment again see if its still needed decide if you should try making linked list and testing before worrying about overal sort 
-// have already defined some pointers in the main student class that should be able to be used by domestic and international
-//void sortDomCGPA(int stu_count1, DomesticStudent *Student1);
+//declare functions to be used in main
 void singleSort(int stu_count1, DomesticStudent *StudentD, char type);
 void singleSort(int stu_count2, InternationalStudent *StudentI, char type);
 

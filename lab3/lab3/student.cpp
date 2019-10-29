@@ -197,7 +197,7 @@ int compareFirstName(Student stu1, Student stu2)
 		}
 		i++;//increment while loop
 	}
-	//check for if the strings are have same first few letters but one has ended and other did not. Shrter length one preceeds
+	//check for if the strings are have same first few letters but one has ended and other did not. Shorter length one preceeds
 	if (stu1.get_firstname()[i] == '\0' && stu2.get_firstname()[i] != '\0')
 	{
 		return(1);
