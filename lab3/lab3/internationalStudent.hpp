@@ -94,6 +94,10 @@ public:
 	//post condition: delete dynamic member varibale memory allocated for the international student object
 	~InternationalStudent();
 
+	//void insertNode(const InternationalStudent **internationalHeadNode,const InternationalStudent &Student1);
+
+	//void insertSort(const InternationalStudent &Student1);
+
 
 private:
 	//private member varibales unique to InternationalStudent, where the TOEFL score is of type ToeflScore, so each InternationStudent class

@@ -89,6 +89,9 @@ public:
 	//post condition: checks cgpa, research score, and application ID for validity. If either fails, exit the program
 	void errorcheck();
 
+	Student* getnextNode() const;
+	void setnextNode(Student*node);
+
 private:
 	//private member variables, where appID is the assigned application ID of the student
 	string firstname;
@@ -96,8 +99,8 @@ private:
 	float cgpa;
 	int researchscore;
 	int appID;
-	Student *head;
-	Student *tail;
+	//pointer to next node
+	Student *nextNode;
 };
 
 

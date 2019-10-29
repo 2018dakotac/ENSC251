@@ -129,3 +129,101 @@ DomesticStudent::~DomesticStudent()
 {
 	//internationally empty
 }
+
+//this function adds a new node to the end of the linked list 
+/*
+void insertNode(DomesticStudent **domesticHeadNode,DomesticStudent &Student1,DomesticStudent **domesticTailNode) {
+	//goes through linked list to get tail node pointer 
+	DomesticStudent *tempPtr = *domesticHeadNode;
+	while (tempPtr != NULL) {
+		tempPtr = &tempPtr->getnextNode;
+		if (&tempPtr->getnextNode=NULL) {
+			//this breaks the loop so tempPtr points the the last node 
+			break;
+		}
+	}
+	//passes data to new node
+	DomesticStudent temp;
+	temp.set_firstname(Student1.get_firstname());
+	temp.set_lastname(Student1.get_lastname());
+	temp.set_researchscore(Student1.get_researchscore());
+	temp.set_cgpa(Student1.get_cgpa());
+	temp.set_appID(Student1.get_appID());
+	temp.set_province(Student1.get_province());
+	temp.setnextNode(Student1.getnextNode());
+	Student1.setnextNode(&temp);//passed node now points to next node
+	*domesticTailNode = temp.getnextNode();//corrects tail node pointer
+	//dont forget to delete memory 
+}
+
+
+*/
+
+void DomesticStudent::insertNode(DomesticStudent &Student1,const DomesticStudent **domesticTailNode) {
+	DomesticStudent temp;
+	temp.set_firstname(Student1.get_firstname());
+	temp.set_lastname(Student1.get_lastname());
+	temp.set_researchscore(Student1.get_researchscore());
+	temp.set_cgpa(Student1.get_cgpa());
+	temp.set_appID(Student1.get_appID());
+	temp.set_province(Student1.get_province());
+	temp.setnextNode(NULL);
+	*domesticTailNode = &temp;
+	Student1.setnextNode(&temp);
+}
+/*for (int i = 0; i < stu_count1 - 1; i++)
+				{
+					for (int j = i + 1; j < stu_count1; j++)
+					{
+						//swap elements if element j has larger research score
+						if (compareResearchScore(Domestic[i], Domestic[j]) == -1)
+						{
+							//swap using overloaded assignment operator
+							tempD = Domestic[i];//use temp to swap
+							Domestic[i] = Domestic[j];
+							Domestic[j] = tempD;
+						}
+						//if research score is equal, check cgpa	
+						if (compareResearchScore(Domestic[i], Domestic[j]) == 0)
+						{
+							//if element j has higher cgpa than element i, swap them
+							if (compareCGPA(Domestic[i], Domestic[j]) == -1)
+							{
+								//swap using overloaded assingment operator
+								tempD = Domestic[i];//use temp to swap
+								Domestic[i] = Domestic[j];
+								Domestic[j] = tempD;
+							}
+							//if cgpa is equal, check province
+							if (compareCGPA(Domestic[i], Domestic[j]) == 0)
+							{
+								//if element j preceeds element i alphebetically, swap them
+								if (compareProvince(Domestic[i], Domestic[j]) == -1)
+								{
+									//swap using overloaded assignment operator
+									tempD = Domestic[i];//use temp to swap
+									Domestic[i] = Domestic[j];
+									Domestic[j] = tempD;
+								}
+							}
+						}
+					}
+				}*/
+void DomesticStudent::insertSort(DomesticStudent **domesticHeadNode) {
+	//check for no list or list 1 node long
+	if (domesticHeadNode == NULL) {
+		return;
+	}
+
+	DomesticStudent *tempPtr = *domesticHeadNode;
+	DomesticStudent *nexttempPtr = NULL;
+	while (tempPtr != NULL) {
+		nexttempPtr = &tempPtr->getnextNode;
+		tempPtr = &tempPtr->getnextNode;
+		if(compareResearchScore())
+	}
+	//assign new domestic head node
+	//delete data
+	
+
+}

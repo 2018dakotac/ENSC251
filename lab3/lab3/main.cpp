@@ -15,6 +15,8 @@
 #include <string>
 #include <iomanip>
 
+using namespace std;
+
 //declare functions to be used in main
 void singleSort(int stu_count1, DomesticStudent *StudentD, char type);
 void singleSort(int stu_count2, InternationalStudent *StudentI, char type);
@@ -22,7 +24,12 @@ void singleSort(int stu_count2, InternationalStudent *StudentI, char type);
 
 
 int main() {
-
+	//Intialize head and tail pointer for both domestic and international
+	DomesticStudent *domesticHeadNode = NULL;
+	InternationalStudent *internationalHeadNode = NULL;
+	DomesticStudent *domesticTailNode = NULL;
+	InternationalStudent *internationalTailNode = NULL;
+	//will be given proper memory address when linked list is created
 	//DOMESTIC STUDENT reading file and outputting
 
 	//opening and checking to see if the file domestic-stu.txt opened and closing the program if opening failed.
@@ -235,6 +242,8 @@ int main() {
 	char sorting = 'x';//input for sorting type
 	int sorttries = 0;//tries for sorting
 	char sortyn = 'x';//resorting choice
+
+
 
 
 	while (sorttries < 50)//while loop for resorting option

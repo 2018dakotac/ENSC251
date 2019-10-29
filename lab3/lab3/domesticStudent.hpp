@@ -40,14 +40,18 @@ public:
 	//post condition:object on the left of the equals sign holds the same values as the one on the right
 	void operator =(const DomesticStudent& right_side);
 
+
 	//copy constructor
 	//pre condition: pass a domestic student object whose member variables are to be copied to another object
 	//post condition:member varibales of Dstu copied to another object
 	DomesticStudent(const DomesticStudent& Dstu);
 
-	//default destructor
 	//delete dyanmic memory allocated for dynamic member variables
 	~DomesticStudent();
+
+	void insertNode(DomesticStudent &Student1,const DomesticStudent **domesticTailNode);
+	void insertSort(DomesticStudent **domesticHeadNode);
+
 
 private:
 	//unique member variable to DomesticStudent
