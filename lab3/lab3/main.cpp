@@ -20,15 +20,10 @@
 //clean up international calls 
 // dont deal with overall sort, look into assignment again see if its still needed decide if you should try making linked list and testing before worrying about overal sort 
 // have already defined some pointers in the main student class that should be able to be used by domestic and international
-void sortDomCGPA(int stu_count1, DomesticStudent *Student1);
-void sortDomResearchScore(int stu_count1, DomesticStudent *Student1);
-void sortDomFirstName(int stu_count1, DomesticStudent *Student1);
-void sortDomLastName(int stu_count1, DomesticStudent *Student1);
-void sortDomProvince(int stu_count1, DomesticStudent *Student1);
-//void singleSort(DomesticStudent* DomesticStudents, int num, char type);
-//void singleSort(InternationalStudent* InternationalStudents, int num, char type);
-//void sortBy(DomesticStudent* DomesticStudents, int num, string type);
-//void sortBy(InternationalStudent* InternationalStudents, int num, string type);
+//void sortDomCGPA(int stu_count1, DomesticStudent *Student1);
+void singleSort(int stu_count1, DomesticStudent *StudentD, char type);
+void singleSort(int stu_count2, InternationalStudent *StudentI, char type);
+
 
 
 int main() {
@@ -268,121 +263,49 @@ int main() {
 					//sort cgpa from highest to lowest
 					if (sorting == 'C' || sorting == 'c')
 					{
-						//selection sort algorithm, compare one element to all others in array, reducing comparison size till get to last element
-						/*
-						for (int i = 0; i < stu_count1 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count1; j++)
-							{
-								//if j element is larger
-								if (compareCGPA(Domestic[i], Domestic[j]) == -1)
-								{
-									//swap elements using overloaded assingment operator
-									tempD = Domestic[i];//use temp to swap
-									Domestic[i] = Domestic[j];
-									Domestic[j] = tempD;
-								}
-							}
-						}
-						break;
-						*/
-						sortDomCGPA(stu_count1, Domestic);
+						if (sorting == 'c')
+							sorting = 'C';
+						singleSort(stu_count1, Domestic, sorting);
 						break;
 					}
 
 					//research score sort from highest to lowest
 					else if (sorting == 'R' || sorting == 'r')
 					{
-						sortDomResearchScore(stu_count1, Domestic);
-						/*
-						//selection sort algorithm
-						for (int i = 0; i < stu_count1 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count1; j++)
-							{
-								//if j element research score is larger, swap 
-								if (compareResearchScore(Domestic[i], Domestic[j]) == -1)
-								{
-									//swap elements using overloaded assignment operator
-									tempD = Domestic[i];//use temp to swap
-									Domestic[i] = Domestic[j];
-									Domestic[j] = tempD;
-								}
-							}
-						}
-						*/
+						//sanitize input 
+						if (sorting == 'r')
+							sorting = 'R';
+						singleSort(stu_count1, Domestic,sorting);
 						break;
 					}
 
 					//first name sort in alphabetical order from A-Z
 					else if (sorting == 'F' || sorting == 'f')
 					{
-						/*
-						//selection sort algorithm
-						for (int i = 0; i < stu_count1 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count1; j++)
-							{
-								//if j element preceeds I elemetent alphebetically 
-								if (compareFirstName(Domestic[i], Domestic[j]) == -1)
-								{
-									//swap elements using overloaded assingment operator
-									tempD = Domestic[i];//use temp to swap
-									Domestic[i] = Domestic[j];
-									Domestic[j] = tempD;
-								}
-							}
-						}
-						*/
-						sortDomFirstName(stu_count1, Domestic);
+						//sanitize input
+						if (sorting == 'f')
+							sorting = 'F';
+						singleSort(stu_count1, Domestic, sorting);
 						break;
 					}
 
 					//last name sort in alphabetical order from A-Z
 					else if (sorting == 'L' || sorting == 'l')
 					{
-						/*
-						//selection sort algorithm
-						for (int i = 0; i < stu_count1 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count1; j++)
-							{
-								//if j element preceeds i element alphebetically 
-								if (compareLastName(Domestic[i], Domestic[j]) == -1)
-								{
-									//swap elements using overloaded assignment operator
-									tempD = Domestic[i];//use temp to swap
-									Domestic[i] = Domestic[j];
-									Domestic[j] = tempD;
-								}
-							}
-						}
-						*/
-						sortDomLastName(stu_count1, Domestic);
+						//sanitize input
+						if (sorting == 'l')
+							sorting = 'L';
+						singleSort(stu_count1, Domestic, sorting);
 						break;
 					}
 
 					//province sort in alphabetical order from A-Z
 					else if (sorting == 'P' || sorting == 'p')
 					{
-						/*
-						//selection sort algorithm
-						for (int i = 0; i < stu_count1 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count1; j++)
-							{
-								//if j element preceeds i element alphebetically 
-								if (compareProvince(Domestic[i], Domestic[j]) == -1)
-								{
-									//swap elements using overloaded assignment operator
-									tempD = Domestic[i];//use temp to swap
-									Domestic[i] = Domestic[j];
-									Domestic[j] = tempD;
-								}
-							}
-						}
-						*/
-						sortDomProvince(stu_count1, Domestic);
+						//sanitize input
+						if (sorting == 'p')
+							sorting = 'P';
+						singleSort(stu_count1, Domestic, sorting);
 						break;
 					}
 
@@ -407,132 +330,66 @@ int main() {
 				while (categorytries < 50) //category while loop
 				{
 					cout << "What would you like to sort? Enter C for sorting cgpa, R for research score, F for first name "
-						<< " L for sorting last name, I for sorting by country, and T for sorting ToeflScore." << endl;
+						<< " L for sorting last name, Z for sorting by country, and T for sorting ToeflScore." << endl;
 					cin >> sorting;//choice for category sort
 
 					//sort cgpa highest to lowest order
 					if (sorting == 'C' || sorting == 'c')
 					{
-						//selection sort algorithm
-						for (int i = 0; i < stu_count2 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count2; j++)
-							{
-								//if j element is larger than i element swap the two 
-								if (compareCGPA(International[i], International[j]) == -1)
-								{
-									//swap elements using overloaded assignment operator
-									tempI = International[i];//use to temp to swap
-									International[i] = International[j];
-									International[j] = tempI;
-								}
-							}
-						}
+						//sanitize input
+						if (sorting == 'c')
+							sorting = 'C';
+						singleSort(stu_count2,International, sorting);
 						break;
 					}
 
 					//sort research score highest to lowest
 					else if (sorting == 'R' || sorting == 'r')
 					{
-						//selection sort algorithm
-						for (int i = 0; i < stu_count2 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count2; j++)
-							{
-								//if j element is larger than i element, swap them
-								if (compareResearchScore(International[i], International[j]) == -1)
-								{
-									//swap elements using overloaded assignment operator
-									tempI = International[i];//use temp to swap
-									International[i] = International[j];
-									International[j] = tempI;
-								}
-							}
-						}
+						//sanitize input
+						if (sorting == 'r')
+							sorting = 'R';
+						singleSort(stu_count2, International, sorting);
 						break;
 					}
 
 					//sort first name in alphabetical order from A-Z
 					else if (sorting == 'F' || sorting == 'f')
 					{
-						//selection sort algorithm
-						for (int i = 0; i < stu_count2 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count2; j++)
-							{
-								//if j element preceeds i element alphabetically, swap them 
-								if (compareFirstName(International[i], International[j]) == -1)
-								{
-									//swap elements using overloaded assignment operator
-									tempI = International[i];//use temp to swap
-									International[i] = International[j];
-									International[j] = tempI;
-								}
-							}
-						}
+						//sanitize input
+						if (sorting == 'f')
+							sorting = 'F';
+						singleSort(stu_count2, International, sorting);
 						break;
 					}
 
 					//sort last name in alphabetical order from A-Z
 					else if (sorting == 'L' || sorting == 'l')
 					{
-						//selection sort algorithm
-						for (int i = 0; i < stu_count2 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count2; j++)
-							{
-								//if j element preceeds i element alphabetically, swap them 
-								if (compareLastName(International[i], International[j]) == -1)
-								{
-									//swap elements using overloaded assignement operator
-									tempI = International[i];//use temp to swap
-									International[i] = International[j];
-									International[j] = tempI;
-								}
-							}
-						}
+						//sanitize input
+						if (sorting == 'l')
+							sorting = 'L';
+						singleSort(stu_count2, International, sorting);
 						break;
 					}
 
 					//I for international/country sort, sorting them in alphabetical order from A-Z
-					else if (sorting == 'I' || sorting == 'i')
+					else if (sorting == 'Z' || sorting == 'z')
 					{
-						//selection sort algorithm
-						for (int i = 0; i < stu_count2 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count2; j++)
-							{
-								//if j element preceeds i element alphabetically, swap them
-								if (compareCountry(International[i], International[j]) == -1)
-								{
-									//swap elements using overloaded assignment operator
-									tempI = International[i];//use temp to swap
-									International[i] = International[j];
-									International[j] = tempI;
-								}
-							}
-						}
+						//sanitize input
+						if (sorting == 'z')
+							sorting = 'Z';
+						singleSort(stu_count2, International, sorting);
 						break;
 					}
 
 					//toefl score sort from highest to lowest number
 					else if (sorting == 'T' || sorting == 't')
 					{
-						//selection sort algorithm
-						for (int i = 0; i < stu_count2 - 1; i++)
-						{
-							for (int j = i + 1; j < stu_count2; j++)
-							{
-								//if j element larger than i element, swap them 
-								if (compareToeflScore(International[i], International[j]) == -1)
-								{
-									//swap elements using overloaded assingment operator
-									tempI = International[i];//use temp to swap
-									International[i] = International[j];
-									International[j] = tempI;
-								}
-							}
-						}
+						//sanitize input
+						if (sorting == 't')
+							sorting = 'T';
+						singleSort(stu_count2, International, sorting);
 						break;
 					}
 
@@ -850,145 +707,58 @@ int main() {
 	return 0;
 }
 
-void sortDomCGPA(int stu_count1, DomesticStudent *Student1) {
-	
-		//selection sort algorithm, compare one element to all others in array, reducing comparison size till get to last element
-		for (int i = 0; i < stu_count1 - 1; i++)
-		{
-			for (int j = i + 1; j < stu_count1; j++)
-			{
-				//if j element is larger
-				if (compareCGPA(Student1[i], Student1[j]) == -1)
-				{
-					DomesticStudent tempD;
-					//swap elements using overloaded assingment operator
-					tempD = Student1[i];//use temp to swap
-					Student1[i] = Student1[j];
-					Student1[j] = tempD;
-				}
-			}
-		}
-}
-void sortDomResearchScore(int stu_count1, DomesticStudent *Student1) {
+
+void singleSort(int stu_count1, DomesticStudent *StudentD,char type) {
 	//selection sort algorithm
 	for (int i = 0; i < stu_count1 - 1; i++)
 	{
 		for (int j = i + 1; j < stu_count1; j++)
 		{
 			//if j element research score is larger, swap 
-			if (compareResearchScore(Student1[i], Student1[j]) == -1)
+			if (
+				((type =='R')&&(compareResearchScore(StudentD[i], StudentD[j]) == -1))
+				|| ((type == 'F') &&(compareFirstName(StudentD[i], StudentD[j]) == -1))
+				|| ((type == 'C') &&(compareCGPA(StudentD[i], StudentD[j]) == -1))
+				|| ((type == 'L') &&(compareLastName(StudentD[i], StudentD[j]) == -1))
+				|| ((type == 'P') && (compareProvince(StudentD[i], StudentD[j]) == -1))
+				)
 			{
 				DomesticStudent tempD;
 				//swap elements using overloaded assignment operator
-				tempD = Student1[i];//use temp to swap
-				Student1[i] = Student1[j];
-				Student1[j] = tempD;
+				tempD = StudentD[i];//use temp to swap
+				StudentD[i] = StudentD[j];
+				StudentD[j] = tempD;
 			}
 		}
 	}
 }
-void sortDomFirstName(int stu_count1, DomesticStudent *Student1) {
+void singleSort(int stu_count2, InternationalStudent *StudentI, char type) {
 	//selection sort algorithm
-	for (int i = 0; i < stu_count1 - 1; i++)
+	for (int i = 0; i < stu_count2 - 1; i++)
 	{
-		for (int j = i + 1; j < stu_count1; j++)
+		for (int j = i + 1; j < stu_count2; j++)
 		{
 			//if j element research score is larger, swap 
-			if (compareFirstName(Student1[i], Student1[j]) == -1)
+			if (
+				((type == 'R') && (compareResearchScore(StudentI[i], StudentI[j]) == -1))
+				|| ((type == 'F') && (compareFirstName(StudentI[i], StudentI[j]) == -1))
+				|| ((type == 'C') && (compareCGPA(StudentI[i], StudentI[j]) == -1))
+				|| ((type == 'L') && (compareLastName(StudentI[i], StudentI[j]) == -1))
+				|| ((type == 'Z') && (compareCountry(StudentI[i], StudentI[j]) == -1))
+				|| ((type == 'T') && (compareToeflScore(StudentI[i], StudentI[j]) == -1))
+				) 
 			{
-				DomesticStudent tempD;
+				InternationalStudent tempI;
 				//swap elements using overloaded assignment operator
-				tempD = Student1[i];//use temp to swap
-				Student1[i] = Student1[j];
-				Student1[j] = tempD;
+				tempI = StudentI[i];//use temp to swap
+				StudentI[i] = StudentI[j];
+				StudentI[j] = tempI;
 			}
 		}
 	}
 }
-void sortDomLastName(int stu_count1, DomesticStudent *Student1) {
-	//selection sort algorithm
-	for (int i = 0; i < stu_count1 - 1; i++)
-	{
-		for (int j = i + 1; j < stu_count1; j++)
-		{
-			//if j element research score is larger, swap 
-			if (compareLastName(Student1[i], Student1[j]) == -1)
-			{
-				DomesticStudent tempD;
-				//swap elements using overloaded assignment operator
-				tempD = Student1[i];//use temp to swap
-				Student1[i] = Student1[j];
-				Student1[j] = tempD;
-			}
-		}
-	}
-}
-void sortDomProvince(int stu_count1, DomesticStudent *Student1) {
-	//selection sort algorithm
-	for (int i = 0; i < stu_count1 - 1; i++)
-	{
-		for (int j = i + 1; j < stu_count1; j++)
-		{
-			//if j element research score is larger, swap 
-			if (compareProvince(Student1[i], Student1[j]) == -1)
-			{
-				DomesticStudent tempD;
-				//swap elements using overloaded assignment operator
-				tempD = Student1[i];//use temp to swap
-				Student1[i] = Student1[j];
-				Student1[j] = tempD;
-			}
-		}
-	}
-}
+
 /*
-void singleSort(DomesticStudent* DomesticStudents, int num, char type)
-{
-
-	// if the type is not specifically "ascending", then sort in descending order
-
-	// implement bubble sort algorithm
-	for (int i = 0; i < num-1; i++)
-	{
-		for (int j = i+1; j < num; j++)
-		{
-			if ((type == 'F') && (compareFirstName(DomesticStudents[j], DomesticStudents[j + 1]))
-				|| (type == 'L') && (compareLastName(DomesticStudents[j], DomesticStudents[j + 1]))
-				|| (type == 'C') && (compareCGPA(DomesticStudents[j], DomesticStudents[j + 1]))
-				|| (type == 'R') && (compareResearchScore(DomesticStudents[j], DomesticStudents[j + 1]))
-				|| (type == 'P') && (compareProvince(DomesticStudents[j], DomesticStudents[j + 1])))
-			{
-				DomesticStudent tmpStudent;
-				tmpStudent = DomesticStudents[j];
-				DomesticStudents[j] = DomesticStudents[j + 1];
-				DomesticStudents[j + 1] = tmpStudent;
-			}
-		}
-	}
-}
-
-void singleSort(InternationalStudent* InternationalStudents, int num, char type)
-{
-	// implement bubble sort algorithm
-	for (int i = 0; i < num-1; i++)
-	{
-		for (int j = 0; j < num - 1; j++)
-		{
-			if ((type == 'F') && (compareFirstName(InternationalStudents[j], InternationalStudents[j + 1])
-				|| (type == 'L') && (compareLastName(InternationalStudents[j], InternationalStudents[j + 1])))
-				|| (type == 'C') && (compareCGPA(InternationalStudents[j], InternationalStudents[j + 1]))
-				|| (type == 'R') && (compareResearchScore(InternationalStudents[j], InternationalStudents[j + 1]))
-				|| (type == 'Z') && (compareCountry(InternationalStudents[j], InternationalStudents[j + 1])))
-			{
-				InternationalStudent tmpStudent;
-				tmpStudent = InternationalStudents[j];
-				InternationalStudents[j] = InternationalStudents[j + 1];
-				InternationalStudents[j + 1] = tmpStudent;
-			}
-		}
-	}
-}
-
 void sortBy(DomesticStudent* DomesticStudents, int num, string type)
 {
 	for (int i = 0; i < type.size(); i++) {
