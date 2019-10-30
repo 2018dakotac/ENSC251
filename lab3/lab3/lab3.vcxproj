@@ -25,6 +25,7 @@
   <ItemGroup>
     <ClCompile Include="domesticStudent.cpp" />
     <ClCompile Include="internationalStudent.cpp" />
+    <ClCompile Include="linkedListStudent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="student.cpp" />
     <ClCompile Include="toelfScore.cpp" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <ClInclude Include="domesticStudent.hpp" />
     <ClInclude Include="internationalStudent.hpp" />
+    <ClInclude Include="linkedListStudent.hpp" />
     <ClInclude Include="student.hpp" />
     <ClInclude Include="toeflScore.hpp" />
   </ItemGroup>

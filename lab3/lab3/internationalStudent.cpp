@@ -29,8 +29,8 @@ InternationalStudent::InternationalStudent(string FN, string LN, float gradept, 
 //international student is initialized too
 InternationalStudent::InternationalStudent()
 {
-	set_firstname("NAME");
-	set_lastname("SURNAME");
+	set_firstname("INAME");
+	set_lastname("ISURNAME");
 	set_cgpa(0.00);
 	set_researchscore(0);
 	set_appID(20200000);
@@ -38,7 +38,7 @@ InternationalStudent::InternationalStudent()
 	TOEFL.set_listening(0);
 	TOEFL.set_speaking(0);
 	TOEFL.set_writing(0);
-	country = "COUNTRY";
+	country = "ICOUNTRY";
 }
 
 //mutator/set function for the member varibale country, unique to international student. No error checking for strings.
@@ -235,4 +235,18 @@ InternationalStudent::InternationalStudent(const InternationalStudent& Istu)
 InternationalStudent::~InternationalStudent()
 {
 	// intentionally empty
+}
+
+bool operator == (InternationalStudent student1, InternationalStudent student2) {
+
+	//used to compare values of two domestic students
+	if (student1.get_firstname == student2.get_firstname() &&
+		student1.get_lastname() == student2.get_lastname() &&
+		student1.get_country() == student2.get_country() &&
+		student1.get_cgpa() == student2.get_cgpa() &&
+		student1.get_researchscore() == student2.get_researchscore())
+	{
+		return true;
+	}
+	return false;
 }

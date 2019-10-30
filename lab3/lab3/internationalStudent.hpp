@@ -89,6 +89,7 @@ public:
 //pre condition:pass the object to be copied to another
 //post condition:created identical copy of the international student object
 	InternationalStudent(const InternationalStudent& Istu);
+	friend bool operator == (InternationalStudent student1, InternationalStudent student2);
 
 	//destructor
 	//post condition: delete dynamic member varibale memory allocated for the international student object

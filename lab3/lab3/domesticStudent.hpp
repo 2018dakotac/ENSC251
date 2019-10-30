@@ -39,7 +39,8 @@ public:
 	//pre condition: pass an object whose member variables values are to be assinged to another object
 	//post condition:object on the left of the equals sign holds the same values as the one on the right
 	void operator =(const DomesticStudent& right_side);
-
+	//allows comparison of domestic student objects
+	friend bool operator == (DomesticStudent student1, DomesticStudent student2);
 
 	//copy constructor
 	//pre condition: pass a domestic student object whose member variables are to be copied to another object
@@ -48,9 +49,6 @@ public:
 
 	//delete dyanmic memory allocated for dynamic member variables
 	~DomesticStudent();
-
-	void insertNode(DomesticStudent &Student1,const DomesticStudent **domesticTailNode);
-	void insertSort(DomesticStudent **domesticHeadNode);
 
 
 private:

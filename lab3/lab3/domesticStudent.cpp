@@ -2,7 +2,7 @@
 //DOMESTIC STUDENT DEFINTION
 
 //Domestic student constructor, which takes FN(firstname), LN (lastname), gradept(cgpa), research (researchscore)
-//Id(application number), prov(province),and uses them to initialize member variables. Set functions are used to 
+//Id(application number), prov(province),and uses them to initialize member variables. Set functions are used to
 //initialize variables that are in the parent class Student, where we alternitivley could have called the
 //Student constructor in the initialization section. Set is used since the parent constructor cant be called in the
 //function body
@@ -20,7 +20,7 @@ DomesticStudent::DomesticStudent(string FN, string LN, float gradept, int resear
 		cout << "Error: Invalid province. Exiting Program.";
 		exit(-1);
 	}
-	errorcheck();//calling the error check function to ensure the initialized values are valid. The error checking function 
+	errorcheck();//calling the error check function to ensure the initialized values are valid. The error checking function
    //is in parent class Student
 }
 
@@ -28,12 +28,12 @@ DomesticStudent::DomesticStudent(string FN, string LN, float gradept, int resear
 //parent class Student, instead of calling the Student constructor in the initalization section.
 DomesticStudent::DomesticStudent()
 {
-	set_firstname("NAME");
-	set_lastname("SURNAME");
+	set_firstname("DNAME");
+	set_lastname("DSURNAME");
 	set_cgpa(0.00);
 	set_researchscore(0);
 	set_appID(20200000);
-	province = "ab";
+	province = "DPROVINCE";
 }
 
 //mutator/set function for the varibale province of domestic student, with errror checking included
@@ -130,100 +130,16 @@ DomesticStudent::~DomesticStudent()
 	//internationally empty
 }
 
-//this function adds a new node to the end of the linked list 
-/*
-void insertNode(DomesticStudent **domesticHeadNode,DomesticStudent &Student1,DomesticStudent **domesticTailNode) {
-	//goes through linked list to get tail node pointer 
-	DomesticStudent *tempPtr = *domesticHeadNode;
-	while (tempPtr != NULL) {
-		tempPtr = &tempPtr->getnextNode;
-		if (&tempPtr->getnextNode=NULL) {
-			//this breaks the loop so tempPtr points the the last node 
-			break;
-		}
+bool operator == (DomesticStudent student1, DomesticStudent student2) {
+
+//used to compare values of two domestic students
+	if (student1.get_firstname == student2.get_firstname() &&
+		student1.get_lastname() == student2.get_lastname() &&
+		student1.get_province() == student2.get_province() &&
+		student1.get_cgpa() == student2.get_cgpa() &&
+		student1.get_researchscore() == student2.get_researchscore())
+	{
+		return true;
 	}
-	//passes data to new node
-	DomesticStudent temp;
-	temp.set_firstname(Student1.get_firstname());
-	temp.set_lastname(Student1.get_lastname());
-	temp.set_researchscore(Student1.get_researchscore());
-	temp.set_cgpa(Student1.get_cgpa());
-	temp.set_appID(Student1.get_appID());
-	temp.set_province(Student1.get_province());
-	temp.setnextNode(Student1.getnextNode());
-	Student1.setnextNode(&temp);//passed node now points to next node
-	*domesticTailNode = temp.getnextNode();//corrects tail node pointer
-	//dont forget to delete memory 
-}
-
-
-*/
-
-void DomesticStudent::insertNode(DomesticStudent &Student1,const DomesticStudent **domesticTailNode) {
-	DomesticStudent temp;
-	temp.set_firstname(Student1.get_firstname());
-	temp.set_lastname(Student1.get_lastname());
-	temp.set_researchscore(Student1.get_researchscore());
-	temp.set_cgpa(Student1.get_cgpa());
-	temp.set_appID(Student1.get_appID());
-	temp.set_province(Student1.get_province());
-	temp.setnextNode(NULL);
-	*domesticTailNode = &temp;
-	Student1.setnextNode(&temp);
-}
-/*for (int i = 0; i < stu_count1 - 1; i++)
-				{
-					for (int j = i + 1; j < stu_count1; j++)
-					{
-						//swap elements if element j has larger research score
-						if (compareResearchScore(Domestic[i], Domestic[j]) == -1)
-						{
-							//swap using overloaded assignment operator
-							tempD = Domestic[i];//use temp to swap
-							Domestic[i] = Domestic[j];
-							Domestic[j] = tempD;
-						}
-						//if research score is equal, check cgpa	
-						if (compareResearchScore(Domestic[i], Domestic[j]) == 0)
-						{
-							//if element j has higher cgpa than element i, swap them
-							if (compareCGPA(Domestic[i], Domestic[j]) == -1)
-							{
-								//swap using overloaded assingment operator
-								tempD = Domestic[i];//use temp to swap
-								Domestic[i] = Domestic[j];
-								Domestic[j] = tempD;
-							}
-							//if cgpa is equal, check province
-							if (compareCGPA(Domestic[i], Domestic[j]) == 0)
-							{
-								//if element j preceeds element i alphebetically, swap them
-								if (compareProvince(Domestic[i], Domestic[j]) == -1)
-								{
-									//swap using overloaded assignment operator
-									tempD = Domestic[i];//use temp to swap
-									Domestic[i] = Domestic[j];
-									Domestic[j] = tempD;
-								}
-							}
-						}
-					}
-				}*/
-void DomesticStudent::insertSort(DomesticStudent **domesticHeadNode) {
-	//check for no list or list 1 node long
-	if (domesticHeadNode == NULL) {
-		return;
-	}
-
-	DomesticStudent *tempPtr = *domesticHeadNode;
-	DomesticStudent *nexttempPtr = NULL;
-	while (tempPtr != NULL) {
-		nexttempPtr = &tempPtr->getnextNode;
-		tempPtr = &tempPtr->getnextNode;
-		if(compareResearchScore())
-	}
-	//assign new domestic head node
-	//delete data
-	
-
+	return false;
 }

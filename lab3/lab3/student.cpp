@@ -36,7 +36,7 @@ Student::Student()
 	cgpa = 0.00;
 	researchscore = 0;
 	appID = 20200000;
-	nextNode = NULL;
+	//extNode = NULL;
 }
 
 //student error checking function to make sure the cgpa is not less than 0 or greater than
@@ -88,6 +88,7 @@ string Student::get_lastname() const
 {
 	return (lastname);
 }
+/*
 //node accessor and mutator function
 Student* Student::getnextNode() const{
 	return (nextNode);
@@ -95,7 +96,7 @@ Student* Student::getnextNode() const{
 void Student::setnextNode(Student*node1) {
 	this->nextNode = node1;
 }
-
+*/
 //mutator/set function for the cgpa variable, where when wanting to set a new value
 //for the cgpa, it is error checked each time to ensure the value is not less than 
 //0.00 or more than 4.33 (4 point scale)

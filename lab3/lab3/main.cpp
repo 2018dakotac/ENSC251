@@ -12,6 +12,7 @@
 #include "domesticStudent.hpp"
 #include "internationalStudent.hpp"
 #include "toeflScore.hpp"
+#include "linkedListStudent.hpp"
 #include <string>
 #include <iomanip>
 
@@ -20,15 +21,23 @@ using namespace std;
 //declare functions to be used in main
 void singleSort(int stu_count1, DomesticStudent *StudentD, char type);
 void singleSort(int stu_count2, InternationalStudent *StudentI, char type);
+//linked list functions
 
+void insertNode(DomesticStudent Student1, StudentList **domesticHeadNode);
+void insertNode(InternationalStudent Student1, StudentList **internationalHeadNode);
 
+void frontBackSplit(StudentList*sourceNode, StudentList**frontRef, StudentList**backRef);
+void mergeSort(StudentList**headRef);
+StudentList * SortedMerge(StudentList*a, StudentList*b,char type);
+
+//void insertSort(DomesticStudent **domesticHeadNode, DomesticStudent **domesticTailNode);
 
 int main() {
 	//Intialize head and tail pointer for both domestic and international
-	DomesticStudent *domesticHeadNode = NULL;
-	InternationalStudent *internationalHeadNode = NULL;
-	DomesticStudent *domesticTailNode = NULL;
-	InternationalStudent *internationalTailNode = NULL;
+	StudentList *domesticHeadNode = NULL;
+	StudentList *internationalHeadNode = NULL;
+	StudentList *domesticTailNode = NULL;
+	StudentList *internationalTailNode = NULL;
 	//will be given proper memory address when linked list is created
 	//DOMESTIC STUDENT reading file and outputting
 
@@ -761,6 +770,94 @@ void singleSort(int stu_count2, InternationalStudent *StudentI, char type) {
 		}
 	}
 }
+void insertNode(DomesticStudent Student1, StudentList **domesticHeadNode) {
+	StudentList*newHead = new StudentList;
+	newHead->domStudent = Student1;
+	newHead->nextNode = (*domesticHeadNode);
+	(*domesticHeadNode) = newHead;
+
+}
+void insertNode(InternationalStudent Student1, StudentList **internationalHeadNode) {
+	StudentList*newHead = new StudentList;
+	newHead->intStudent = Student1;
+	newHead->nextNode = (*internationalHeadNode);
+	(*internationalHeadNode) = newHead;
+
+}
+//void insertSort(DomesticStudent **domesticHeadNode, DomesticStudent **domesticTailNode);
+void frontBackSplit(StudentList*sourceNode, StudentList**frontRef, StudentList**backRef) {
+	StudentList *fast;
+	StudentList* slow;
+	slow = sourceNode;
+	fast = sourceNode->nextNode;
+	while (fast != NULL) {
+		fast = fast->nextNode;
+		if (fast != NULL) {
+			slow = slow->nextNode;
+			fast = fast->nextNode;
+		}
+	}
+
+	*frontRef = sourceNode;
+	*backRef = slow->nextNode;
+	slow->nextNode = NULL;
+}
+void mergeSort(StudentList**headRef,char type) {
+	StudentList* head = (*headRef);
+	headRef* a;
+	headRef* b;
+	//base case check
+	//try head.nextNode if this doesnt work
+	if ((head == NULL) || (head->nextNode==NULL)) {
+		return;
+	}
+	//split linked lists into two
+	frontBackSplit(head, &a, &b);
+		//recursively sorts
+	mergeSort(&a);
+	mergeSort(&b);
+
+		// final merge result
+	*headRef = SortedMerge(a, b,type);
+}
+
+StudentList * SortedMerge(StudentList * a, StudentList * b, char type)
+{
+	StudentList * result = NULL;
+	if (type == 'R') {//lab 2 scheme
+		
+		//base case check
+		if (a == NULL) {
+			return (b);
+		}
+		if (b == NULL) {
+			return (a);
+		}
+		if (compareListResearchScore(a, b) == -1) {
+			result = a;
+			result->nextNode = SortedMerge(a->nextNode, b,type);
+		}
+		else if ((compareListResearchScore(a, b) == 0) && (compareListCGPA(a, b) == -1)) {
+			result = a;
+			result->nextNode = SortedMerge(a->nextNode, b,type);
+		}
+		else if ((compareListResearchScore(a, b) == 0) && (compareListCGPA(a, b) == 0) && (compareListLocation(a, b) == -1)) {
+			result = a;
+			result->nextNode = SortedMerge(a->nextNode, b,type);
+		}
+		else {
+			result = b;
+			result->nextNode = SortedMerge(a, b->nextNode,type);
+		}
+		return (result);
+	}
+	if (type == 'O') {//for overall sort scheme
+		return (result);
+	}
+
+}
+
+
 
 /*
 void sortBy(DomesticStudent* DomesticStudents, int num, string type)
