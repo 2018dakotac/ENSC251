@@ -133,7 +133,7 @@ DomesticStudent::~DomesticStudent()
 bool operator == (DomesticStudent student1, DomesticStudent student2) {
 
 //used to compare values of two domestic students
-	if (student1.get_firstname == student2.get_firstname() &&
+	if (student1.get_firstname() == student2.get_firstname() &&
 		student1.get_lastname() == student2.get_lastname() &&
 		student1.get_province() == student2.get_province() &&
 		student1.get_cgpa() == student2.get_cgpa() &&

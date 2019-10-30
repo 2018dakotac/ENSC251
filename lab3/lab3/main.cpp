@@ -804,8 +804,8 @@ void frontBackSplit(StudentList*sourceNode, StudentList**frontRef, StudentList**
 }
 void mergeSort(StudentList**headRef,char type) {
 	StudentList* head = (*headRef);
-	headRef* a;
-	headRef* b;
+	StudentList* a;
+	StudentList* b;
 	//base case check
 	//try head.nextNode if this doesnt work
 	if ((head == NULL) || (head->nextNode==NULL)) {
@@ -814,8 +814,8 @@ void mergeSort(StudentList**headRef,char type) {
 	//split linked lists into two
 	frontBackSplit(head, &a, &b);
 		//recursively sorts
-	mergeSort(&a);
-	mergeSort(&b);
+	mergeSort(&a,type);
+	mergeSort(&b,type);
 
 		// final merge result
 	*headRef = SortedMerge(a, b,type);

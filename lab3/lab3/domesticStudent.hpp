@@ -40,7 +40,7 @@ public:
 	//post condition:object on the left of the equals sign holds the same values as the one on the right
 	void operator =(const DomesticStudent& right_side);
 	//allows comparison of domestic student objects
-	friend bool operator == (DomesticStudent student1, DomesticStudent student2);
+	friend bool operator ==(DomesticStudent student1,DomesticStudent student2);
 
 	//copy constructor
 	//pre condition: pass a domestic student object whose member variables are to be copied to another object

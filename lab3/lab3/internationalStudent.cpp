@@ -240,7 +240,7 @@ InternationalStudent::~InternationalStudent()
 bool operator == (InternationalStudent student1, InternationalStudent student2) {
 
 	//used to compare values of two domestic students
-	if (student1.get_firstname == student2.get_firstname() &&
+	if (student1.get_firstname() == student2.get_firstname() &&
 		student1.get_lastname() == student2.get_lastname() &&
 		student1.get_country() == student2.get_country() &&
 		student1.get_cgpa() == student2.get_cgpa() &&
