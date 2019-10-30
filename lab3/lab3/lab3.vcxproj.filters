@@ -27,10 +27,10 @@
     <ClCompile Include="internationalStudent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="toelfScore.cpp">
+    <ClCompile Include="linkedListStudent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="linkedListStudent.cpp">
+    <ClCompile Include="toeflScore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

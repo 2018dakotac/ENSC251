@@ -24,7 +24,7 @@
     <ClCompile Include="linkedListStudent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="student.cpp" />
-    <ClCompile Include="toelfScore.cpp" />
+    <ClCompile Include="toeflScore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="domesticStudent.hpp" />
