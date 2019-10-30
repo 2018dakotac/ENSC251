@@ -27,17 +27,16 @@ void insertNode(DomesticStudent Student1, StudentList **domesticHeadNode);
 void insertNode(InternationalStudent Student1, StudentList **internationalHeadNode);
 
 void frontBackSplit(StudentList*sourceNode, StudentList**frontRef, StudentList**backRef);
-void mergeSort(StudentList**headRef);
-StudentList * SortedMerge(StudentList*a, StudentList*b,char type);
+void mergeSort(StudentList**headRef, char type);
+StudentList * SortedMerge(StudentList*a, StudentList*b, char type);
+void tailNodeFinder(StudentList **headNode, StudentList **tailNode);
+
 
 //void insertSort(DomesticStudent **domesticHeadNode, DomesticStudent **domesticTailNode);
 
 int main() {
 	//Intialize head and tail pointer for both domestic and international
-	StudentList *domesticHeadNode = NULL;
-	StudentList *internationalHeadNode = NULL;
-	StudentList *domesticTailNode = NULL;
-	StudentList *internationalTailNode = NULL;
+
 	//will be given proper memory address when linked list is created
 	//DOMESTIC STUDENT reading file and outputting
 
@@ -60,6 +59,12 @@ int main() {
 	//initializing the first student number as 20200000, for the first student. This variable will be used to
 	//assign student numbers in the while loop for reading the fi;e
 	int studentnum = 20200000;
+	StudentList *domesticHeadNode = NULL;
+	StudentList *internationalHeadNode = NULL;
+	StudentList *domesticTailNode = NULL;
+	StudentList *internationalTailNode = NULL;
+
+
 
 	//for going thru the while loop when reading the file, counting how many entries are made
 	int stu_count1 = 0;
@@ -71,13 +76,13 @@ int main() {
 	cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
 		<< setw(20) << left << "Research Score" << setw(20) << left << "CGPA" << setw(20) << left << "Province" << endl;
 
-	
+
 
 
 	while (getline(domesticFile, line)) {
 		//process each line, get each field separated by a comma.
 		 //use istringstream to handle it.
-
+		DomesticStudent fakeStudent;
 		istringstream ss(line);
 
 		//all values read are inputted as strings, declare variables to hold them	
@@ -90,31 +95,34 @@ int main() {
 		//get firstName separated by comma
 		getline(ss, firstName, ',');
 		Domestic[stu_count1].set_firstname(firstName);
+		fakeStudent.set_firstname(firstName);
 
 		//get lastName separated by comma
 		getline(ss, lastName, ',');
 		Domestic[stu_count1].set_lastname(lastName);
+		fakeStudent.set_lastname(lastName);
 
 		//get province separated by comma
 		getline(ss, province, ',');
 		Domestic[stu_count1].set_province(province);
-
+		fakeStudent.set_province(province);
 		//get cpga separated by comma, and convert string to float
 		getline(ss, s_cgpa, ',');
 		cgpa = atof(s_cgpa.c_str());
 		Domestic[stu_count1].set_cgpa(cgpa);
-
+		fakeStudent.set_cgpa(cgpa);
 		//get researchScore separated by comma, and convert it to int
 		getline(ss, s_researchScore, ',');
 		researchScore = atoi(s_researchScore.c_str());
 		Domestic[stu_count1].set_researchscore(researchScore);
-
+		fakeStudent.set_researchscore(researchScore);
 		//setting the application ID
 		Domestic[stu_count1].set_appID(studentnum);
-
+		fakeStudent.set_appID(studentnum);
 		//use overloaded operator to print out data each time
 		cout << Domestic[stu_count1];
-
+		cout << fakeStudent;
+		insertNode(fakeStudent, &domesticHeadNode);
 		//incrementing student number counter
 		studentnum++;
 
@@ -124,8 +132,6 @@ int main() {
 
 	//closing the file
 	domesticFile.close();
-
-
 
 	//INTERNATIONAL STUDENT reading file and outputting
 
@@ -288,7 +294,7 @@ int main() {
 						//sanitize input 
 						if (sorting == 'r')
 							sorting = 'R';
-						singleSort(stu_count1, Domestic,sorting);
+						singleSort(stu_count1, Domestic, sorting);
 						break;
 					}
 
@@ -352,7 +358,7 @@ int main() {
 						//sanitize input
 						if (sorting == 'c')
 							sorting = 'C';
-						singleSort(stu_count2,International, sorting);
+						singleSort(stu_count2, International, sorting);
 						break;
 					}
 
@@ -709,7 +715,7 @@ int main() {
 			cout << "Invalid entry. Outputting current sort " << endl;
 			break;
 		}
-	} 
+	}
 
 	//delete allocated memory for the domestic and international arrays
 	delete[] Domestic;
@@ -719,6 +725,9 @@ int main() {
 
 	return 0;
 }
+
+
+
 
 
 void singleSort(int stu_count1, DomesticStudent *StudentD,char type) {
@@ -856,6 +865,23 @@ StudentList * SortedMerge(StudentList * a, StudentList * b, char type)
 	}
 
 }
+
+void tailNodeFinder(StudentList **headNode, StudentList **tailNode) {
+	//goes through linked list to get tail node pointer
+	StudentList *tempPtr = *headNode;
+	while (tempPtr != NULL) {
+		tempPtr = tempPtr->nextNode;
+		if (tempPtr->nextNode = NULL) {
+			*tailNode = tempPtr;
+			//this breaks the loop so tempPtr points the the last node that points to null
+			break;
+		}
+	}
+	if (tempPtr == NULL) {//base case that there one or no nodes
+		*tailNode = *headNode;
+	}
+}
+
 
 
 

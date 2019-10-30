@@ -19,10 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="domestic-stu.txt" />
-    <Text Include="international-stu.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="domesticStudent.cpp" />
     <ClCompile Include="internationalStudent.cpp" />
     <ClCompile Include="linkedListStudent.cpp" />
@@ -36,6 +32,10 @@
     <ClInclude Include="linkedListStudent.hpp" />
     <ClInclude Include="student.hpp" />
     <ClInclude Include="toeflScore.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="domestic-stu.txt" />
+    <Text Include="international-stu.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

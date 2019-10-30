@@ -1,6 +1,14 @@
 #include "linkedListStudent.hpp"
+#include <iostream>
+#include <iomanip>
+#include <string>
 
 
+
+//default constructor
+StudentList::StudentList() {
+	this->nextNode = NULL;
+}
 
 int compareListResearchScore(StudentList* student1, StudentList* student2) {
 	int n1, n2;
@@ -131,11 +139,5 @@ int compareListCGPA(StudentList* student1, StudentList* student2) {
 	if (n1 < n2) return -1;
 	return 0;
 
-}
-
-
-//default constructor
-StudentList::StudentList() {
-	this->nextNode = NULL;
 }
 

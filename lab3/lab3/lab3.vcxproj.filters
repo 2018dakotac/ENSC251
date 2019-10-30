@@ -15,14 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="international-stu.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="domestic-stu.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -58,5 +50,13 @@
     <ClInclude Include="linkedListStudent.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="domestic-stu.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="international-stu.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
