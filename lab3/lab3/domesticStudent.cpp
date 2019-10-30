@@ -41,11 +41,13 @@ void DomesticStudent::set_province(string provi)
 {
 	province = provi;
 	//checking province entered is valid pair of letters
+	/*
 	if (province != "BC" && province != "AB" && province != "NS" && province != "NU" && province != "ON" && province != "PE" && province != "QC" && province != "SK" && province != "YT" &&  province != "MB" &&  province != "NB" &&  province != "NL" && province != "NT")
 	{
 		cout << "Error: Invalid province. Exiting Program.";
 		exit(-1);
 	}
+	*/
 }
 
 //accessor/get function for the province variable

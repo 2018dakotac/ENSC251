@@ -123,6 +123,7 @@ int main() {
 		cout << Domestic[stu_count1];
 		cout << fakeStudent;
 		insertNode(fakeStudent, &domesticHeadNode);
+		mergeSort(&domesticHeadNode, 'R');
 		//incrementing student number counter
 		studentnum++;
 
@@ -132,7 +133,7 @@ int main() {
 
 	//closing the file
 	domesticFile.close();
-
+	//GOT IT TO WORK BY REMOVING PROVINCE CHECK, should we have sort function be called after intialization because its very slow.................ask ta
 	//INTERNATIONAL STUDENT reading file and outputting
 
 	//opening and checking to see if the file international-stu.txt opened, if not then closing the program
