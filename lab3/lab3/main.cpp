@@ -30,9 +30,14 @@ void frontBackSplit(StudentList*sourceNode, StudentList**frontRef, StudentList**
 void mergeSort(StudentList**headRef, char type);
 StudentList * SortedMerge(StudentList*a, StudentList*b, char type);
 void tailNodeFinder(StudentList **headNode, StudentList **tailNode);
+void printLinkedList(StudentList**headNode);
 
 
 //void insertSort(DomesticStudent **domesticHeadNode, DomesticStudent **domesticTailNode);
+//look on piazza to see if you actually need to sort the list each time you input a node or if you can do it after (when reading from file)
+//TO DO but not required
+//need basic input checking see cin.fail() exit program or clear input buffer, make a function then call it after each cin?
+//there is some built in error checking for some of the set functions, maybe improve or add some (except for country too many countries)
 
 int main() {
 	//Intialize head and tail pointer for both domestic and international
@@ -123,7 +128,7 @@ int main() {
 		cout << Domestic[stu_count1];
 		cout << fakeStudent;
 		insertNode(fakeStudent, &domesticHeadNode);
-		mergeSort(&domesticHeadNode, 'R');
+		
 		//incrementing student number counter
 		studentnum++;
 
@@ -133,7 +138,13 @@ int main() {
 
 	//closing the file
 	domesticFile.close();
-	//GOT IT TO WORK BY REMOVING PROVINCE CHECK, should we have sort function be called after intialization because its very slow.................ask ta
+
+	//sort domestic linked list
+	mergeSort(&domesticHeadNode, 'R');
+	//set domestic tail node 
+	tailNodeFinder(&domesticHeadNode, &domesticTailNode);
+
+
 	//INTERNATIONAL STUDENT reading file and outputting
 
 	//opening and checking to see if the file international-stu.txt opened, if not then closing the program
@@ -174,33 +185,37 @@ int main() {
 		//variables to hold float/int values once converted from strings
 		float cgpa;
 		int researchScore, reading, writing, speaking, listening;
+		//temporary student object
+		InternationalStudent fakeStudent;
 
 		//since the objects have already been initialized by the default constructor, to avoid creating another anonymous obejct, use the set functions to input data
 		//get firstName separated by comma
 		getline(ss, firstName, ',');
 		International[stu_count2].set_firstname(firstName);
+		fakeStudent.set_firstname(firstName);
 
 		//get lastName separated by comma
 		getline(ss, lastName, ',');
 		International[stu_count2].set_lastname(lastName);
+		fakeStudent.set_lastname(lastName);
 
 		//get country separated by comma
 		getline(ss, country, ',');
 		International[stu_count2].set_country(country);
-
+		fakeStudent.set_country(country);
 		//get cpga separated by comma, and convert string to float
 		getline(ss, s_cgpa, ',');
 		cgpa = atof(s_cgpa.c_str());
 		International[stu_count2].set_cgpa(cgpa);
-
+		fakeStudent.set_cgpa(cgpa);
 		//get researchScore separated by comma, and convert it to int
 		getline(ss, s_researchScore, ',');
 		researchScore = atoi(s_researchScore.c_str());
 		International[stu_count2].set_researchscore(researchScore);
-
+		fakeStudent.set_researchscore(researchScore);
 		//setting the application ID of the student
 		International[stu_count2].set_appID(studentnum);
-
+		fakeStudent.set_appID(studentnum);
 		//get reading, writng, listening and speaking scores and cast to int
 		getline(ss, s_reading, ',');
 		reading = atoi(s_reading.c_str());
@@ -220,21 +235,19 @@ int main() {
 		International[stu_count2].set_Tlisten(listening);//listening
 		International[stu_count2].set_Tspeak(speaking);//speaking
 		International[stu_count2].set_Ttotal(reading, writing, listening, speaking);//total
+		fakeStudent.set_Tread(reading);
+		fakeStudent.set_Tlisten(listening);
+		fakeStudent.set_Twrite(writing);
+		fakeStudent.set_Tspeak(speaking);
+		fakeStudent.set_Ttotal(reading, writing, listening, speaking);
 
-		//if the students toefl scores/total dont meet requirements, continue to next student, assigning them the student number, resetting info.
-		//student who dont meet the requirements arent sorted
-		if (International[stu_count2].checkTOEFLreq(reading, listening, speaking, writing) == false)
-		{
-			cout << International[stu_count2]; //ouput info regardless, adding flag that they didnt meet toefl requirements.
-			cout << "TOEFL REQ. NOT MET" << endl;
-			continue;//dont update student counter or student number counter. Next valid student gets that student number
-		}
-		else
-		{
-			//output using overloaded output operator
-			cout << International[stu_count2] << endl;
-		}
+		//output using overloaded output operator
+		cout << International[stu_count2] << endl;
+		cout << fakeStudent << endl;
 
+		//pass student object to linked list
+		insertNode(fakeStudent, &internationalHeadNode);
+		
 		//incrementing student number counter to ensure no 2 students have same number
 		studentnum++;
 		//incrementing loop counter
@@ -244,8 +257,188 @@ int main() {
 	//closing the file
 	InternationalFile.close();
 
+	//sort international linked list
+	mergeSort(&internationalHeadNode, 'R');
+	//set internatinonal tail node 
+	tailNodeFinder(&internationalHeadNode, &internationalTailNode);
 
-	//sorting 
+	//lab 3 sorting
+
+	//initialize/reset variables for loop conditions
+	int sorttries = 0;//tries for sorting
+	char linkedSort = 'x';
+	char sortAgain = 'x';
+
+	while (sorttries<50){
+
+
+		cout << endl << endl << "Linked lists have been intilialized while being continually sorted." << endl;
+		cout << "Insert 'S' to search nodes, 'A' to add a student node, 'D' to delete a student node, 'Z' to delete head and tail node (at the same time!), or 'M' to merge linked lists." << endl;
+		cin >> linkedSort;
+		if (linkedSort == 'M'|| linkedSort == 'm') {
+			break;
+		} 
+		else if (linkedSort == 's' || linkedSort == 'S') {
+			char searchType;
+			int inputFail = 1;
+			while (inputFail == 1) {
+				cout << "Insert what you would like to search by, 'C' for cgpa, 'A' for application ID, 'R' for research score, 'N' for first and last name" << endl;
+				cin >> searchType;
+				if (searchType == 'C' || searchType == 'c') {
+
+				}
+				else if (searchType == 'A' || searchType == 'a') {
+					//error message fo rapp id requested application id doesnt exit or belongs to a student that has been deleted***
+				}
+				else if (searchType == 'R' || searchType == 'r') {
+
+				}
+				else if (searchType == 'N' || searchType == 'n') {
+
+				}
+
+				inputFail = 0;
+			}
+		
+		} 
+		else if (linkedSort == 'a' || linkedSort == 'A') {
+			//get user input for student info with checks alone the way maybe do while loop until the idiot user gets it right
+			int inputFail = 1;
+			while (inputFail) {
+				char studentType= 'x';
+				cout << "Enter 'D' for domestic or 'I' for international" << endl;
+				cin >> studentType;
+				if (studentType == 'D' || studentType == 'd') { 
+
+					string firstName, lastName, province;
+					float cgpa;
+					int researchScore;
+					DomesticStudent fakeStudent;
+
+					cout << "Enter new student first name" << endl;
+					cin >> firstName;
+					cout << "Enter new student last name" << endl;
+					cin >> lastName;
+					cout << "Enter student province" << endl;
+					cin >> province;
+					cout << "Enter student cgpa" << endl;
+					cin >> cgpa;
+					cout << "Enter student research score" << endl;
+					cin >> researchScore;
+
+					fakeStudent.set_firstname(firstName);
+					fakeStudent.set_lastname(lastName);
+					fakeStudent.set_province(province);
+					fakeStudent.set_cgpa(cgpa);
+					fakeStudent.set_researchscore(researchScore);
+					fakeStudent.set_appID(studentnum);
+					insertNode(fakeStudent, &domesticHeadNode);
+					mergeSort(&domesticHeadNode, 'R');
+					printLinkedList(&domesticHeadNode);
+					studentnum++;
+				}
+				else if (studentType == 'I' || studentType == 'i') {
+					string firstName, lastName, country;
+					float cgpa;
+					int researchScore, reading, writing, speaking, listening;
+					InternationalStudent fakeStudent;
+
+					cout << "Enter new student first name" << endl;
+					cin >> firstName;
+					cout << "Enter new student last name" << endl;
+					cin >> lastName;
+					cout << "Enter student country" << endl;
+					cin >> country;
+					cout << "Enter student cgpa" << endl;
+					cin >> cgpa;
+					cout << "Enter student research score" << endl;
+					cin >> researchScore;
+					cout << "Enter student TOEFL reading score" << endl;
+					cin >> reading;
+					cout << "Enter student TOEFL listening score" << endl;
+					cin >> listening;
+					cout << "Enter student TOEFL speaking score" << endl;
+					cin >> speaking;
+					cout << "Enter student TOEFL writing score" << endl;
+					cin >> writing;
+
+					fakeStudent.set_firstname(firstName);
+					fakeStudent.set_lastname(lastName);
+					fakeStudent.set_country(country);
+					fakeStudent.set_cgpa(cgpa);
+					fakeStudent.set_researchscore(researchScore);
+					fakeStudent.set_appID(studentnum);
+
+					fakeStudent.set_Tread(reading);
+					fakeStudent.set_Tlisten(listening);
+					fakeStudent.set_Twrite(writing);
+					fakeStudent.set_Tspeak(speaking);
+					fakeStudent.set_Ttotal(reading, writing, listening, speaking);
+					insertNode(fakeStudent, &internationalHeadNode);
+					mergeSort(&internationalHeadNode, 'R');
+					printLinkedList(&internationalHeadNode);
+				}
+				else {
+					cout << "Improper input, Try again";
+					continue;
+				}
+			
+				inputFail = 0;
+			}
+		} 
+		else if (linkedSort == 'd' || linkedSort == 'D') {
+
+			//ask for first name and last name (maybe use search function?) then call delete function
+		}
+		else if (linkedSort == 'z' || linkedSort == 'Z') {
+
+			//find tail node again just in case?
+			//delete head and tail node 
+		}
+		
+
+		//allowing option to do multiple sorts at once
+		cout << "Would you like to sort again? Enter Y for YES, and N for NO" << endl;
+		cin >> sortAgain;//choice for sorting multiple times
+
+		if (sortAgain == 'Y' || sortAgain == 'y')
+		{
+			sorttries++;//update attempts loop and sort again
+			continue;
+		}
+
+		else if (sortAgain == 'N' || sortAgain == 'n')
+			break;//stop sorting, just do once
+
+		   //otherwise just sort once and not again
+		else
+		{
+			cout << "Invalid entry. Outputting current sort " << endl;
+			break;
+		}
+	}
+	if (linkedSort == 'M' || linkedSort == 'm') {
+		//merge then sort with mergeSort but pass overall char
+		//NEED TO PROGRAM Mergesort for overall sort (different priority)
+
+	}
+	
+
+	//freeing up memory as program is over
+	while (domesticHeadNode != NULL) {
+		StudentList* soonToBeDeadNode = domesticHeadNode;
+		domesticHeadNode = domesticHeadNode->nextNode;
+		delete soonToBeDeadNode;
+
+	}
+	while (internationalHeadNode != NULL) {
+		StudentList* soonToBeDeadNode = internationalHeadNode;
+		internationalHeadNode = internationalHeadNode->nextNode;
+		delete soonToBeDeadNode;
+	}
+	// do this for merged student headnode if you make one
+
+
 
 
 	DomesticStudent tempD; // temp object for swapping
@@ -256,12 +449,12 @@ int main() {
 	int high2lowtries = 0;//attempts for high to low or low to high
 	char HL = 'x'; //input for high to low choice
 	char sorting = 'x';//input for sorting type
-	int sorttries = 0;//tries for sorting
+	sorttries = 0;//tries for sorting
 	char sortyn = 'x';//resorting choice
 
 
 
-
+	//lab 2 sorting
 	while (sorttries < 50)//while loop for resorting option
 	{
 
@@ -717,8 +910,7 @@ int main() {
 			break;
 		}
 	}
-
-	//delete allocated memory for the domestic and international arrays
+	//delete allocated memory for the domestic and international arrays LAB23
 	delete[] Domestic;
 	delete[] International;
 
@@ -872,7 +1064,7 @@ void tailNodeFinder(StudentList **headNode, StudentList **tailNode) {
 	StudentList *tempPtr = *headNode;
 	while (tempPtr != NULL) {
 		tempPtr = tempPtr->nextNode;
-		if (tempPtr->nextNode = NULL) {
+		if (tempPtr->nextNode == NULL) {
 			*tailNode = tempPtr;
 			//this breaks the loop so tempPtr points the the last node that points to null
 			break;
@@ -882,25 +1074,28 @@ void tailNodeFinder(StudentList **headNode, StudentList **tailNode) {
 		*tailNode = *headNode;
 	}
 }
-
-
-
-
-/*
-void sortBy(DomesticStudent* DomesticStudents, int num, string type)
-{
-	for (int i = 0; i < type.size(); i++) {
-		cout << type[i];
-		singleSort(DomesticStudents, num, type[i]);
+void printLinkedList(StudentList**headNode) {
+	StudentList *tempPtr = *headNode;
+	//create blank international and domestic students to compare and see which type each node is
+	DomesticStudent blankDomesticStudent;
+	InternationalStudent blankInternationalStudent;
+	if (tempPtr == NULL) {//base case that there one or no nodes
+		cout << "Linked list is empy..." << endl;
 	}
+	
+	while (tempPtr != NULL) {//compares determins node type and prints object
+		if (!(tempPtr->domStudent == blankDomesticStudent)) {
+			cout << tempPtr->domStudent << endl;
+	
+		}
+		if (!(tempPtr->intStudent == blankInternationalStudent)) {
+			cout << tempPtr->intStudent << endl;
+		}
+		tempPtr = tempPtr->nextNode;
+		
+	}
+
 }
 
-void sortBy(InternationalStudent* InternationalStudents, int num, string type)
-{
-	for (int i = 0; i < type.size(); i++) {
-		singleSort(InternationalStudents, num, type[i]);
-	}
-}
-*/
 
 

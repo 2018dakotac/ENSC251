@@ -15,6 +15,7 @@ DomesticStudent::DomesticStudent(string FN, string LN, float gradept, int resear
 	set_appID(ID);
 	province = prov;
 	//province error check
+
 	if (province != "BC" && province != "AB" && province != "NS" &&  province != "NU" &&  province != "ON" &&  province != "PE" &&  province != "QC" &&  province != "SK" &&  province != "YT" && province != "MB" && province != "NB" && province != "NL" && province != "NT")
 	{
 		cout << "Error: Invalid province. Exiting Program.";
