@@ -237,7 +237,7 @@ InternationalStudent::~InternationalStudent()
 	// intentionally empty
 }
 
-bool operator == (InternationalStudent student1, InternationalStudent student2) {
+bool operator == (InternationalStudent &student1, InternationalStudent &student2) {
 
 	//used to compare values of two domestic students
 	if (student1.get_firstname() == student2.get_firstname() &&

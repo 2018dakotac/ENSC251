@@ -46,20 +46,20 @@ void Student::errorcheck()
 {
 	if ((cgpa < 0.00) || (cgpa > 4.33))
 	{
-		cout << "Error: Invalid CGPA. Exiting program";
-		exit(1);
+		cout << "Error: Invalid CGPA. Exiting program(exit commented out)";
+		//exit(1);
 	}
 
 	if ((researchscore < 0) || (researchscore > 100))
 	{
-		cout << "Error: Invalid Research Score. Exiting program";
-		exit(1);
+		cout << "Error: Invalid Research Score. Exiting program(exit commented out)";
+		//exit(1);
 	}
-
+	
 	if ((appID < 20200000) || (appID > 20210000))
 	{
-		cout << "Error: Invalid Application ID. Exiting program";
-		exit(1);
+		cout << "Errorcheck: Invalid Application ID. Exiting program(currently commented out)";
+		//exit(1);
 	}
 }
 
@@ -103,11 +103,13 @@ void Student::setnextNode(Student*node1) {
 void Student::set_cgpa(float grade)
 {
 	cgpa = grade;
+	
 	if ((cgpa < 0.00) || (cgpa > 4.33))
 	{
 		cout << "Error: Invalid CGPA. Exiting program";
 		exit(1);
 	}
+	
 }
 
 //accessor/get function to get the cgpa varibale
@@ -122,11 +124,13 @@ float Student::get_cgpa() const
 void Student::set_researchscore(int RS)
 {
 	researchscore = RS;
+	
 	if ((researchscore < 0) || (researchscore > 100))
 	{
 		cout << "Error: Invalid Research Score. Exiting program";
 		exit(1);
 	}
+	
 }
 
 //accessor/get function for the researchscore variable
@@ -140,11 +144,13 @@ int Student::get_researchscore() const
 void Student::set_appID(int IDnum)
 {
 	appID = IDnum;
+	
 	if ((appID < 20200000) || (appID > 20210000))
 	{
 		cout << "Error: Invalid Application ID. Exiting program";
 		exit(1);
 	}
+	
 }
 
 //accessor/get function for the application id variable

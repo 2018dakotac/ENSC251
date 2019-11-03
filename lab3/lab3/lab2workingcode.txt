@@ -1,0 +1,480 @@
+//lab 2 sorting commented out
+	/*
+
+International[stu_count2].set_Tread(reading);//reading 
+		International[stu_count2].set_Twrite(writing);//writing
+		International[stu_count2].set_Tlisten(listening);//listening
+		International[stu_count2].set_Tspeak(speaking);//speaking
+		International[stu_count2].set_Ttotal(reading, writing, listening, speaking);//total
+
+	DomesticStudent tempD; // temp object for swapping
+	InternationalStudent tempI; //temp pbject for swapping
+	char students = 'x'; //input for student type to sort
+	int stutries = 0; //attempts for student type
+	int categorytries = 0; //attempts for category
+	int high2lowtries = 0;//attempts for high to low or low to high
+	char HL = 'x'; //input for high to low choice
+	char sorting = 'x';//input for sorting type
+	sorttries = 0;//tries for sorting
+	char sortyn = 'x';//resorting choice
+
+	while (sorttries < 50)//while loop for resorting option
+	{
+
+		while (stutries < 50) //while loop for choosing student type
+		{
+
+			cout << "Which group would you like to sort? Enter 'D' for Domestic Students, 'I' for International Student, and 'O' for an overall sort." << endl;
+			cin >> students;//student type choice
+		   //domestic student sort
+			if (students == 'D' || students == 'd')
+			{
+
+				while (categorytries < 50) //while loop for choosing category
+				{
+					cout << "What would you like to sort? Enter C for sorting cgpa, R for research score, F for first name, "
+						<< "P for province, and L for sorting last name" << endl;
+					cin >> sorting;//category choice
+
+					//sort cgpa from highest to lowest
+					if (sorting == 'C' || sorting == 'c')
+					{
+						if (sorting == 'c')
+							sorting = 'C';
+						singleSort(stu_count1, Domestic, sorting);
+						break;
+					}
+
+					//research score sort from highest to lowest
+					else if (sorting == 'R' || sorting == 'r')
+					{
+						//sanitize input 
+						if (sorting == 'r')
+							sorting = 'R';
+						singleSort(stu_count1, Domestic, sorting);
+						break;
+					}
+
+					//first name sort in alphabetical order from A-Z
+					else if (sorting == 'F' || sorting == 'f')
+					{
+						//sanitize input
+						if (sorting == 'f')
+							sorting = 'F';
+						singleSort(stu_count1, Domestic, sorting);
+						break;
+					}
+
+					//last name sort in alphabetical order from A-Z
+					else if (sorting == 'L' || sorting == 'l')
+					{
+						//sanitize input
+						if (sorting == 'l')
+							sorting = 'L';
+						singleSort(stu_count1, Domestic, sorting);
+						break;
+					}
+
+					//province sort in alphabetical order from A-Z
+					else if (sorting == 'P' || sorting == 'p')
+					{
+						//sanitize input
+						if (sorting == 'p')
+							sorting = 'P';
+						singleSort(stu_count1, Domestic, sorting);
+						break;
+					}
+
+					//invalid letter inputted for catergory
+					else
+					{
+						categorytries++; //increment while loop counter
+						cout << "Error: Invalid entry for category to sort. Please try again. You have " << 50 - categorytries << " tries remaining"
+							<< endl;
+					}
+				}
+				//break out of student loop
+				break;
+			}
+
+
+			//international student sorting 
+
+			else if (students == 'I' || students == 'i')
+			{
+
+				while (categorytries < 50) //category while loop
+				{
+					cout << "What would you like to sort? Enter C for sorting cgpa, R for research score, F for first name "
+						<< " L for sorting last name, Z for sorting by country, and T for sorting ToeflScore." << endl;
+					cin >> sorting;//choice for category sort
+
+					//sort cgpa highest to lowest order
+					if (sorting == 'C' || sorting == 'c')
+					{
+						//sanitize input
+						if (sorting == 'c')
+							sorting = 'C';
+						singleSort(stu_count2, International, sorting);
+						break;
+					}
+
+					//sort research score highest to lowest
+					else if (sorting == 'R' || sorting == 'r')
+					{
+						//sanitize input
+						if (sorting == 'r')
+							sorting = 'R';
+						singleSort(stu_count2, International, sorting);
+						break;
+					}
+
+					//sort first name in alphabetical order from A-Z
+					else if (sorting == 'F' || sorting == 'f')
+					{
+						//sanitize input
+						if (sorting == 'f')
+							sorting = 'F';
+						singleSort(stu_count2, International, sorting);
+						break;
+					}
+
+					//sort last name in alphabetical order from A-Z
+					else if (sorting == 'L' || sorting == 'l')
+					{
+						//sanitize input
+						if (sorting == 'l')
+							sorting = 'L';
+						singleSort(stu_count2, International, sorting);
+						break;
+					}
+
+					//I for international/country sort, sorting them in alphabetical order from A-Z
+					else if (sorting == 'Z' || sorting == 'z')
+					{
+						//sanitize input
+						if (sorting == 'z')
+							sorting = 'Z';
+						singleSort(stu_count2, International, sorting);
+						break;
+					}
+
+					//toefl score sort from highest to lowest number
+					else if (sorting == 'T' || sorting == 't')
+					{
+						//sanitize input
+						if (sorting == 't')
+							sorting = 'T';
+						singleSort(stu_count2, International, sorting);
+						break;
+					}
+
+					//invalid category to sort by
+					else
+					{
+						categorytries++; //increment while loop and retry
+						cout << "Error: Invalid entry for category to sort. Please try again. You have " << 50 - categorytries << " tries remaining"
+							<< endl;
+					}
+				}
+				//break out of student while loop
+				break;
+			}
+
+			//overall sorting, sorts both domestic and international students. Research score, cgpa, province/country is the precedence order
+			else if (students == 'O' || students == 'o')
+			{
+
+				//overall for Domestic Students 
+				 //selection sort algorithm
+				for (int i = 0; i < stu_count1 - 1; i++)
+				{
+					for (int j = i + 1; j < stu_count1; j++)
+					{
+						//swap elements if element j has larger research score
+						if (compareResearchScore(Domestic[i], Domestic[j]) == -1)
+						{
+							//swap using overloaded assignment operator
+							tempD = Domestic[i];//use temp to swap
+							Domestic[i] = Domestic[j];
+							Domestic[j] = tempD;
+						}
+						//if research score is equal, check cgpa	
+						if (compareResearchScore(Domestic[i], Domestic[j]) == 0)
+						{
+							//if element j has higher cgpa than element i, swap them
+							if (compareCGPA(Domestic[i], Domestic[j]) == -1)
+							{
+								//swap using overloaded assingment operator
+								tempD = Domestic[i];//use temp to swap
+								Domestic[i] = Domestic[j];
+								Domestic[j] = tempD;
+							}
+							//if cgpa is equal, check province
+							if (compareCGPA(Domestic[i], Domestic[j]) == 0)
+							{
+								//if element j preceeds element i alphebetically, swap them
+								if (compareProvince(Domestic[i], Domestic[j]) == -1)
+								{
+									//swap using overloaded assignment operator
+									tempD = Domestic[i];//use temp to swap
+									Domestic[i] = Domestic[j];
+									Domestic[j] = tempD;
+								}
+							}
+						}
+					}
+				}
+
+				//overall for international students
+				//selection sort algorithm
+				for (int i = 0; i < stu_count2 - 1; i++)
+				{
+					for (int j = i + 1; j < stu_count2; j++)
+					{
+						//if element j has larger research score than element i, swap the two
+						if (compareResearchScore(International[i], International[j]) == -1)
+						{
+							//swap using overloaded assignment operator
+							tempI = International[i];//use temp to swap
+							International[i] = International[j];
+							International[j] = tempI;
+						}
+						//if research score is equal, check cgpa	
+						if (compareResearchScore(International[i], International[j]) == 0)
+						{
+							//if element j has larger cgpa than element i, swap them
+							if (compareCGPA(International[i], International[j]) == -1)
+							{
+								//swap using overloaded assignement operator
+								tempI = International[i];//use temp to swap
+								International[i] = International[j];
+								International[j] = tempI;
+							}
+							//if cgpa is equal, check country
+							if (compareCGPA(International[i], International[j]) == 0)
+							{
+								//if element j has country preceeding element i alphabetically, swap them
+								if (compareCountry(International[i], International[j]) == -1)
+								{
+									//swap using overloaded assignment operator
+									tempI = International[i];//use temp to swap
+									International[i] = International[j];
+									International[j] = tempI;
+								}
+							}
+						}
+					}
+				}
+				break;
+			}
+
+			//invalid entry for student type to sort
+			else
+			{
+				stutries++;//increment loop counter
+				cout << "Error: Invalid entry for student type to sort. Please try again. You have " << 50 - stutries << " tries remaining." << endl;
+			}
+		}
+
+
+		//outputting the sorted arrays
+		//domestic student outputting
+		if (students == 'D' || students == 'd')
+		{
+			//order of sorting
+			while (high2lowtries < 50)
+			{
+				cout << "What order would you like to sort by? Enter H for highest to lowest (or A-Z), and L for lowest to highest (or Z-A)" << endl;
+				cin >> HL;//sorting order choice
+
+			   //formatting category headers so clean look, used iomanip library to use setw
+				cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
+					<< setw(20) << left << "Research Score" << setw(20) << left << "CGPA" << setw(20) << left << "Province" << endl;
+
+				//if choice is high to low or regular alphabetical
+				if (HL == 'H' || HL == 'h')
+				{
+					//output array first to last element
+					for (int i = 0; i < stu_count1; i++)
+					{
+						cout << Domestic[i];
+					}
+					break;
+				}
+				//if choice is low to high or backward alphabetical
+				else if (HL == 'L' || HL == 'l')
+				{
+					//output from last element of array to first
+					for (int i = stu_count1 - 1; i >= 0; i--)
+					{
+						cout << Domestic[i];
+					}
+					break;
+				}
+
+				else //invalid sorting order entry
+				{
+					high2lowtries++;
+					cout << "Invalid entry for sorting order. Please try again. You have " << 50 - high2lowtries << " tries remaining" << endl;
+				}
+			}
+		}
+
+		//international student sorting ouput
+		if (students == 'I' || students == 'i')
+		{
+
+			//order of sorting
+			while (high2lowtries < 50)
+			{
+				cout << "What order would you like to sort by? Enter H for highest to lowest (or A-Z), and L for lowest to highest (or Z-A)" << endl;
+				cin >> HL;//order of sorting input entry
+
+			   //formatting category headers for sleek look, using setw from iomanip library
+				cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
+					<< setw(20) << left << "Research Score" << setw(20) << left << "CGPA" << setw(20) << left << "Country"
+					<< setw(10) << left << "TOEFL" << setw(10) << left << "Reading" << setw(10) << left << "Writing"
+					<< setw(10) << left << "Listening" << setw(10) << left << "Speaking" << endl;
+
+				//high to low or alphabetical/
+				if (HL == 'H' || HL == 'h')
+				{
+					//output first to last element, since thats how it is sorted originally
+					for (int i = 0; i < stu_count2; i++)
+					{
+						cout << International[i] << endl;
+					}
+					break;
+				}
+
+				//low to high or reverse alphabetical
+				else if (HL == 'L' || HL == 'l')
+				{
+					//output from last to first element
+					for (int i = stu_count2 - 1; i >= 0; i--)
+					{
+						cout << International[i] << endl;
+					}
+					break;
+				}
+
+				//invalid entry for sorting order
+				else
+				{
+					high2lowtries++;
+					cout << "Invalid entry for sorting order. Please try again. You have " << 50 - high2lowtries << " tries remaining" << endl;
+				}
+			}
+		}
+
+
+		//overall sort choice
+		if (students == 'O' || students == 'o')
+		{
+
+			//order of sorting
+			while (high2lowtries < 50)
+			{
+				cout << "What order would you like to sort by? Enter H for highest to lowest (or A-Z), and L for lowest to highest (or Z-A)" << endl;
+				cin >> HL;//choosing sorting order
+				if (HL == 'H' || HL == 'h')
+				{
+					//seperating domestic students
+					cout << endl << endl << "DOMESTIC STUDENTS---------------------------------------------------------------------------------" << endl << endl;
+
+					//outputting the category headers for clean view, using setw from iomanip library
+					cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
+						<< setw(20) << left << "Research Score " << setw(20) << left << "CGPA" << setw(20) << left << "Province" << endl;
+
+					//output array from first to last element
+					for (int i = 0; i < stu_count1; i++)
+					{
+						cout << Domestic[i];
+					}
+
+					//seperating international students
+					cout << endl << endl << "INTERNATIONAL STUDENTS-------------------------------------------------------------------" << endl << endl;
+
+					//outputting the category headers for clean look, using setw from iomanip library
+					cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
+						<< setw(20) << left << "Research Score" << setw(20) << left << "CGPA" << setw(20) << left << "Country"
+						<< setw(10) << left << "TOEFL" << setw(10) << left << "Reading" << setw(10) << left << "Writing"
+						<< setw(10) << left << "Listening" << setw(10) << left << "Speaking" << endl;
+
+					//output array from first to last element
+					for (int i = 0; i < stu_count2; i++)
+					{
+						cout << International[i] << endl;
+					}
+					break;
+				}
+
+				//low to high or reverse alphabetical sort choice
+				else if (HL == 'L' || HL == 'l')
+				{
+
+					//seperate domestic students
+					cout << endl << endl << "DOMESTIC STUDENTS----------------------------------------------------------------------" << endl << endl;
+
+					//output formatted category headers, usng setw from iomanip
+					cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
+						<< setw(20) << left << "Research Score " << setw(20) << left << "CGPA" << setw(20) << left << "Province" << endl;
+
+					//output array from last to first element 
+					for (int i = stu_count1 - 1; i >= 0; i--)
+					{
+						cout << Domestic[i];
+					}
+
+					//seperate international students
+					cout << endl << endl << "INTERNATIONAL STUDENTS----------------------------------------------------------------" << endl << endl;
+
+					//formatting category headers using setw from iomanip
+					cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
+						<< setw(20) << left << "Research Score" << setw(20) << left << "CGPA" << setw(20) << left << "Country"
+						<< setw(10) << left << "TOEFL" << setw(10) << left << "Reading" << setw(10) << left << "Writing"
+						<< setw(10) << left << "Listening" << setw(10) << left << "Speaking" << endl;
+
+					//output from last to first element
+					for (int i = stu_count2 - 1; i >= 0; i--)
+					{
+						cout << International[i] << endl;
+					}
+					break;
+				}
+
+				//invalid entry for sorting order
+				else
+				{
+					high2lowtries++; //increment while loop counter
+					cout << "Invalid entry for sorting order. Please try again. You have " << 50 - high2lowtries << " tries remaining" << endl;
+				}
+			}
+		}
+
+		//allowing option to do multiple sorts at once
+		cout << "Would you like to sort again? Enter Y for YES, and N for NO" << endl;
+		cin >> sortyn;//choice for sorting multiple times
+
+		if (sortyn == 'Y' || sortyn == 'y')
+		{
+			sorttries++;//update attempts loop and sort again
+			continue;
+		}
+
+		else if (sortyn == 'N' || sortyn == 'n')
+			break;//stop sorting, just do once
+
+		   //otherwise just sort once and not again
+		else
+		{
+			cout << "Invalid entry. Outputting current sort " << endl;
+			break;
+		}
+	}
+	*/
+	//delete allocated memory for the domestic and international arrays LAB23
+	delete[] Domestic;
+	delete[] International;
+
