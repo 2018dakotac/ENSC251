@@ -15,9 +15,7 @@ int compareListResearchScore(StudentList* student1, StudentList* student2) {
 	//create student objects to see which type student1 and student 2 is  if they match that means its the opposite.
 	DomesticStudent emptyDomesticStudent;
 	InternationalStudent emptyInternationalStudent;
-	//cout << student1->domStudent << endl << student1->intStudent << endl;
-	//cout << "student 2";
-	//cout << student2->domStudent << endl << student2->intStudent << endl;
+
 	if (student1->domStudent == emptyDomesticStudent) {
 		n1 = student1->intStudent.get_researchscore();
 	}
@@ -31,7 +29,7 @@ int compareListResearchScore(StudentList* student1, StudentList* student2) {
 	if (student2->intStudent == emptyInternationalStudent) {
 		n2 = student2->domStudent.get_researchscore();
 	}
-	//cout << "research score of student 1 " << n1 << " and reseach score of student 2 " << n2 << endl;
+
 
 	if (n1 > n2) return 1;
 	if (n1 < n2) return -1;
@@ -60,18 +58,6 @@ int compareListLocation(StudentList* student1, StudentList* student2) {
 	for (int i = 0; i < temp1.size(); i++) if (temp1[i] >= 'a' && temp1[i] <= 'z') temp1[i] -= ('a' - 'A');
 	for (int i = 0; i < temp2.size(); i++) if (temp2[i] >= 'a' && temp2[i] <= 'z') temp2[i] -= ('a' - 'A');
 	return temp2.compare(temp1);
-}
-int compareListStudentTypes(StudentList* student1, StudentList* student2) {
-	DomesticStudent emptyDomesticStudent;//just like my soul
-	InternationalStudent emptyInternationalStudent;
-	if (student1->domStudent == emptyDomesticStudent && student2->intStudent == emptyInternationalStudent) {
-		return 1;
-	}
-	if (student2->domStudent == emptyDomesticStudent && student1->intStudent == emptyInternationalStudent) {
-		return -1;
-	}
-	//if same type (equal) returns 0
-	return 0;
 }
 int compareListFirstName(StudentList* student1, StudentList* student2) {
 	string temp1, temp2;

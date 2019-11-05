@@ -23,13 +23,13 @@ public:
 
 private:
 };
-//need to comment this properly...
 
+//FUNCTIONS TO COMPARE FIRSTNAME, LASTNAME, CGPA, RESEARCHSCORE, LOCATION
 int compareListFirstName(StudentList* student1, StudentList* student2);
 int compareListLastName(StudentList* student1, StudentList* student2);
 int compareListCGPA(StudentList* student1, StudentList* student2);
 int compareListResearchScore(StudentList* student1, StudentList* student2);
 int compareListLocation(StudentList* student1, StudentList* student2);
-int compareListStudentTypes(StudentList* student1, StudentList* student2);
+
 
 #endif
