@@ -46,20 +46,20 @@ void Student::errorcheck()
 {
 	if ((cgpa < 0.00) || (cgpa > 4.33))
 	{
-		cout << "Error: Invalid CGPA. Exiting program(exit commented out)";
-		//exit(1);
+		cout << "Error: Invalid CGPA. Exiting program";
+		exit(1);
 	}
 
 	if ((researchscore < 0) || (researchscore > 100))
 	{
-		cout << "Error: Invalid Research Score. Exiting program(exit commented out)";
-		//exit(1);
+		cout << "Error: Invalid Research Score. Exiting program";
+		exit(1);
 	}
 	
 	if ((appID < 20200000) || (appID > 20210000))
 	{
-		cout << "Errorcheck: Invalid Application ID. Exiting program(currently commented out)";
-		//exit(1);
+		cout << "Errorcheck: Invalid Application ID. Exiting program";
+		exit(1);
 	}
 }
 
