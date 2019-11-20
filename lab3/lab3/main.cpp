@@ -256,7 +256,6 @@ int main() {
 		cout << "Insert 'S' to search nodes, 'A' to add a student node, 'D' to delete a student node, 'Z' to delete head and tail node (at the same time!), or 'M' to merge linked lists." << endl;
 		cin >> linkedSort;//TAKE USER INPUT
 		if (linkedSort == '1') {
-			mergeSort(&internationalHeadNode, 'R');
 			mergeSort(&domesticHeadNode, 'R');
 			//formatting the output for reading the file, with headers for each category at the top
 			cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
@@ -265,6 +264,7 @@ int main() {
 			printLinkedList(&domesticHeadNode);
 		}
 		if (linkedSort == '2') {
+			mergeSort(&internationalHeadNode, 'R');
 			//formatting the output to have header categories for each member
 			cout << setw(20) << left << "Application ID" << setw(20) << left << "First Name" << setw(20) << left << "Last Name"
 				<< setw(20) << left << "Research Score" << setw(20) << left << "CGPA" << setw(20) << left << "Country"

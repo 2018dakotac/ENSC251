@@ -57,7 +57,11 @@ int compareListLocation(StudentList* student1, StudentList* student2) {
 	//makes strings all capital letters for more reliable comparison
 	for (int i = 0; i < temp1.size(); i++) if (temp1[i] >= 'a' && temp1[i] <= 'z') temp1[i] -= ('a' - 'A');
 	for (int i = 0; i < temp2.size(); i++) if (temp2[i] >= 'a' && temp2[i] <= 'z') temp2[i] -= ('a' - 'A');
-	return temp2.compare(temp1);
+	if(temp1 > temp2) return -1;
+	else if (temp1 == temp2) return 0;
+	else return 1;
+
+	//return temp2.compare(temp1);
 }
 int compareListFirstName(StudentList* student1, StudentList* student2) {
 	string temp1, temp2;
