@@ -1,3 +1,4 @@
+
 //Dakota Crozier & Colin Buchko
 //ENSC 251 ASSINGMENT 
 //
@@ -23,18 +24,6 @@ void singleSort(int stu_count1, DomesticStudent *StudentD, char type);
 void singleSort(int stu_count2, InternationalStudent *StudentI, char type);
 
 
-//function to open file
-ifstream openFile(string fileName) {
-	ifstream file(fileName);
-	if (!file.is_open()) {
-		cout << "Unable to open/find file " << fileName << ". Terminating Program.";
-		exit(-1);
-	}
-	return file;
-}
-
-
-
 int main() {
 	//Intialize head and tail pointer for both domestic and international
 	StudentList *domesticHeadNode = NULL;
@@ -46,11 +35,24 @@ int main() {
 	//DOMESTIC STUDENT reading file and outputting
 
 	//opening and checking to see if the file domestic-stu.txt opened and closing the program if opening failed.
-	string line;
-
-	ifstream domesticFile;
-	domesticFile = openFile("domestic-stu.txt");
+	string line,fileName;
 	
+	char fileCheck = 'x';
+	cout << "Enter 'Q' to open domestic file missing fields."<< endl;
+	cin >> fileCheck;
+	if (fileCheck == 'q' || fileCheck == 'Q') {
+		fileName = "missingfielddom.txt";
+	}
+	else {
+		fileName = "domestic-stu.txt";
+	}
+
+	ifstream domesticFile(fileName.c_str());
+
+	if (!domesticFile.is_open()) {
+		cout << "Unable to open txt file" << endl;
+		return -1;
+	}
 	//Read the first line of domestic-stu.txt, which specifies
 	//the file format. And then print it out to the screen
 	getline(domesticFile, line);
@@ -71,56 +73,48 @@ int main() {
 		//process each line, get each field separated by a comma.
 		 //use istringstream to handle it.
 		DomesticStudent fakeStudent;
+		string dump,line2;
+		line2 = line;
 		istringstream ss(line);
-
+		istringstream ss2(line2);
+		
+		int counter = 0;
+		while (getline(ss2, dump, ',')) {
+			counter++;
+		}
+		if (counter < 5) {
+			cout << "Missing Student data field. Exiting Program." << endl;
+			exit(-2);
+		}
 		//all values read are inputted as strings, declare variables to hold them	
+
 		string firstName, lastName, province, s_cgpa, s_researchScore;
 		//variables to use once converted to float,for cgpa, and int, for research score 
 		float cgpa;
 		int researchScore;
 
 		//get firstName separated by comma
-		if (getline(ss, firstName, ',')) {
-			fakeStudent.set_firstname(firstName);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-2);
-		}
+		getline(ss, firstName, ',');
+		fakeStudent.set_firstname(firstName);
+		
+	
 
 		//get lastName separated by comma
-		if (getline(ss, lastName, ',')) {
-			fakeStudent.set_lastname(lastName);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-3);
-		}
-
+		getline(ss, lastName, ',');
+		fakeStudent.set_lastname(lastName);
+	
 		//get province separated by comma
-		if (getline(ss, province, ',')) {
-			fakeStudent.set_province(province);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-4);
-		}
+		getline(ss, province, ',');
+		fakeStudent.set_province(province);
+		
 		//get cpga separated by comma, and convert string to float
-		if ((getline(ss, s_cgpa, ',')) && (cgpa = atof(s_cgpa.c_str()))) {
-			fakeStudent.set_cgpa(cgpa);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-5);
-		}
+		getline(ss, s_cgpa, ',');
+		cgpa = atof(s_cgpa.c_str());
+		fakeStudent.set_cgpa(cgpa);
 		//get researchScore separated by comma, and convert it to int
-		if ((getline(ss, s_researchScore, ',')) && (researchScore = atoi(s_researchScore.c_str()))) {
-			fakeStudent.set_researchscore(researchScore);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-6);
-		}
+		getline(ss, s_researchScore, ',');
+		researchScore = atoi(s_researchScore.c_str());
+		fakeStudent.set_researchscore(researchScore);
 		//setting the application ID
 		fakeStudent.set_appID(studentnum);
 		//checkes to see if values in range
@@ -148,10 +142,17 @@ int main() {
 	//INTERNATIONAL STUDENT reading file and outputting
 
 	//opening and checking to see if the file international-stu.txt opened, if not then closing the program
-	ifstream InternationalFile;
-	InternationalFile = openFile("international-stu.txt");
+	fileCheck = 'x';
+	cout << "Enter 'U' to open international file missing fields." << endl;
+	cin >> fileCheck;
+	if (fileCheck == 'u' || fileCheck == 'U') {
+		fileName = "missingfieldint.txt";
+	}
+	else {
+		fileName = "international-stu.txt";
+	}
 
-
+	ifstream InternationalFile(fileName.c_str());
 	//Read the first line of international-stu.txt, which specifies
 	//the file format. And then print it out to the screen
 	getline(InternationalFile, line);
@@ -168,8 +169,19 @@ int main() {
 
 		//process each line, get each field separated by a comma.
 		 //use istringstream to handle it.
+		string dump, line2;
+		line2 = line;
 		istringstream ss(line);
+		istringstream ss2(line2);
 
+		int counter = 0;
+		while (getline(ss2, dump, ',')) {//makes a copy of input buffer then checks number of strings seperated by ,
+			counter++;
+		}
+		if (counter < 9) {//if there are under 9 iterations then theres a missing field
+			cout << "Missing Student data field. Exiting Program." << endl;
+			exit(-2);
+		}
 		//all data read as a string, so declare variables to store the strings
 		string firstName, lastName, country, s_cgpa, s_researchScore, s_reading, s_writing, s_speaking, s_listening;
 		//variables to hold float/int values once converted from strings
@@ -181,87 +193,56 @@ int main() {
 		//since the objects have already been initialized by the default constructor, to avoid creating another anonymous obejct, use the set functions to input data
 		//get firstName separated by comma
 
-		if (getline(ss, firstName, ',')) {
-			fakeStudent.set_firstname(firstName);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-7);
-		}
+		getline(ss, firstName, ',');
+
+		fakeStudent.set_firstname(firstName);
 
 		//get lastName separated by comma
-		if (getline(ss, lastName, ',')) {
-			fakeStudent.set_lastname(lastName);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-8);
-		}
-		//get country separated by comma
-		if (getline(ss, country, ',')) {
-			fakeStudent.set_country(country);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-9);
-		}
+		getline(ss, lastName, ',');
 
-	
+		fakeStudent.set_lastname(lastName);
+
+		//get country separated by comma
+		getline(ss, country, ',');
+
+		fakeStudent.set_country(country);
 		//get cpga separated by comma, and convert string to float
-		if ((getline(ss, s_cgpa, ',')) && (cgpa = atof(s_cgpa.c_str()))) {
-			fakeStudent.set_cgpa(cgpa);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-10);
-		}
+		getline(ss, s_cgpa, ',');
+		cgpa = atof(s_cgpa.c_str());
+
+		fakeStudent.set_cgpa(cgpa);
 		//get researchScore separated by comma, and convert it to int
-		if ((getline(ss, s_researchScore, ',')) && (researchScore = atoi(s_researchScore.c_str()))) {
-			fakeStudent.set_researchscore(researchScore);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-11);
-		}
+		getline(ss, s_researchScore, ',');
+		researchScore = atoi(s_researchScore.c_str());
+
+		fakeStudent.set_researchscore(researchScore);
 		//setting the application ID of the student
 
 		fakeStudent.set_appID(studentnum);
 		//get reading, writng, listening and speaking scores and cast to int
-		if (getline(ss, s_reading, ',')&&(reading = atoi(s_reading.c_str()))){
-			fakeStudent.set_Tread(reading);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-12);
-		}
+		getline(ss, s_reading, ',');
+		reading = atoi(s_reading.c_str());
 
-		if (getline(ss, s_listening, ',')&& (listening = atoi(s_listening.c_str()))) {
-			;
-				fakeStudent.set_Tlisten(listening);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-13);
-		}
-		if (getline(ss, s_speaking, ',')&&(speaking = atoi(s_speaking.c_str()))) {
-			fakeStudent.set_Tspeak(speaking);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-14);
-		}
+		getline(ss, s_listening, ',');
+		listening = atoi(s_listening.c_str());
 
-		if (getline(ss, s_writing, ',') && (writing = atoi(s_writing.c_str()))) {
-			fakeStudent.set_Twrite(writing);
-		}
-		else {
-			cout << "Missing Student data field. Exiting Program." << endl;
-			exit(-15);
-		}
-		
-		//setting the total
-		
+		getline(ss, s_speaking, ',');
+		speaking = atoi(s_speaking.c_str());
+
+		getline(ss, s_writing, ',');
+		writing = atoi(s_writing.c_str());
+
+		//setting the individualy toefl scores and the total
+
+		fakeStudent.set_Tread(reading);
+		fakeStudent.set_Tlisten(listening);
+		fakeStudent.set_Twrite(writing);
+		fakeStudent.set_Tspeak(speaking);
 		fakeStudent.set_Ttotal(reading, writing, listening, speaking);
+
+		//output using overloaded output operator
+		//cout << fakeStudent << endl;
+
 		//pass student object to linked list
 		insertNode(fakeStudent, &internationalHeadNode);
 

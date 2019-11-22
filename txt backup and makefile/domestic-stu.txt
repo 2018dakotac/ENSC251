@@ -49,7 +49,7 @@ Caleb,Foster,NT,3.00,86
 Ryan,Gonzales,NS,2.90,85
 Asher,Bryant,NU,2.80,84
 Nathan,Alexander,ON,4.25,83
-Thomas,Russell,4.15,82
+Thomas,Russell,PE,4.15,82
 Emma,Griffin,QC,4.05,81
 Olivia,Stewart,SK,3.95,80
 Ava,Sanchez,YT,3.85,79

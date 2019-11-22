@@ -61,5 +61,11 @@
     <Text Include="international-stu.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="missingfielddom.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="missingfieldint.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

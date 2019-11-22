@@ -37,6 +37,8 @@
   <ItemGroup>
     <Text Include="domestic-stu.txt" />
     <Text Include="international-stu.txt" />
+    <Text Include="missingfielddom.txt" />
+    <Text Include="missingfieldint.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -5,10 +5,6 @@ all: main
 run: main
 	./main
 
-#run unit test
-test: unittest
-	./unittest
-
 #link main.o and student.o to executable main
 main: main.o student.o domesticStudent.o internationalStudent.o toeflScore.o linkedListStudent.o
 	g++ -g -lm -o main main.o student.o domesticStudent.o internationalStudent.o toeflScore.o linkedListStudent.o
@@ -16,11 +12,6 @@ main: main.o student.o domesticStudent.o internationalStudent.o toeflScore.o lin
 #compile the main.cpp to main.o
 main.o: main.cpp
 	g++ -g -c main.cpp
-
-unittest: unittest.o student.o domesticStudent.o internationalStudent.o toeflScore.o linkedListStudent.o
-	g++ -g -lm -o unittest unittest.o student.o domesticStudent.o internationalStudent.o toeflScore.o linkedListStudent.o
-unittest.o: unittest.cpp
-	g++ -g -c unittest.cpp
 
 #compile the student.cpp to student.o
 student.o: student.cpp
@@ -43,4 +34,4 @@ linkedListStudent: linkedListStudntent.cpp
 
 #remove built files
 clean:
-	rm -rf main main.o student.o domesticStudent.o internationalStudent.o toeflScore.o linkedListStudent.o unittest unittest.o *~
+	rm -rf main main.o student.o domesticStudent.o internationalStudent.o toeflScore.o linkedListStudent.o *~
