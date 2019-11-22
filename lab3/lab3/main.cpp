@@ -1,4 +1,4 @@
-
+/*
 //Dakota Crozier & Colin Buchko
 //ENSC 251 ASSINGMENT 
 //
@@ -713,4 +713,4 @@ void singleSort(int stu_count2, InternationalStudent *StudentI, char type) {
 	}
 }
 
-
+*/
