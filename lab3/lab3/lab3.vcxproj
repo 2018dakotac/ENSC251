@@ -25,6 +25,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="student.cpp" />
     <ClCompile Include="toeflScore.cpp" />
+    <ClCompile Include="unittest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="domesticStudent.hpp" />

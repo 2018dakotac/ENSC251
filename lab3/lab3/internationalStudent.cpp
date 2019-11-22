@@ -13,6 +13,7 @@ InternationalStudent::InternationalStudent(string FN, string LN, float gradept, 
 	set_cgpa(gradept);
 	set_researchscore(research);
 	set_appID(ID);
+	set_country(homecountry);//initializing the member function unique to international student
 	errorcheck();//calling error checking function to ensure valid values
 	TOEFL.set_reading(read);//TOEFL, which is a private member variable of InternationalStudent of type ToeflScore, uses its
    //set member function to initialize the individual scores, and the total. The reason the constructor of ToeflScore is not 
@@ -21,7 +22,7 @@ InternationalStudent::InternationalStudent(string FN, string LN, float gradept, 
 	TOEFL.set_speaking(speak);
 	TOEFL.set_writing(write);
 	TOEFL.set_total(read, listen, speak, write);
-	country = homecountry;//initializing the member function unique to international student
+	
 }
 
 //Default student constructor. The set functions for member varibales of parent class Student are called
@@ -44,7 +45,23 @@ InternationalStudent::InternationalStudent()
 //mutator/set function for the member varibale country, unique to international student. No error checking for strings.
 void InternationalStudent::set_country(string home)
 {
-	country = home;
+	
+	if (home == "Idian") {
+		cout << "Typo detected. Idian has been changed to India" << endl;
+		country = "India";
+	}
+	else {
+		country = home;
+	}
+	string temp1;
+	temp1 = country;
+	//make it capital comparison
+	for (int i = 0; i < temp1.size(); i++) if (temp1[i] >= 'a' && temp1[i] <= 'z') temp1[i] -= ('a' - 'A');
+	if (temp1 != "INDIA" && temp1 != "CANADA" && temp1 != "CHINA" && temp1 != "IRAN" && temp1 != "KOREA") {
+		cout << "Invalid Country. Exiting Program";
+		exit(-1);
+	}
+
 }
 
 //accessor/get function for the member varibale country

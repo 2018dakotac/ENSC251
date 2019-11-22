@@ -60,7 +60,9 @@ void Student::errorcheck()
 	{
 		cout << "Errorcheck: Invalid Application ID. Exiting program";
 		exit(1);
+
 	}
+
 }
 
 //mutator/set function for the first name. Assume for lab1 that there are no issues
@@ -104,11 +106,7 @@ void Student::set_cgpa(float grade)
 {
 	cgpa = grade;
 	
-	if ((cgpa < 0.00) || (cgpa > 4.33))
-	{
-		cout << "Error: Invalid CGPA. Exiting program";
-		exit(1);
-	}
+	
 	
 }
 
@@ -125,11 +123,7 @@ void Student::set_researchscore(int RS)
 {
 	researchscore = RS;
 	
-	if ((researchscore < 0) || (researchscore > 100))
-	{
-		cout << "Error: Invalid Research Score. Exiting program";
-		exit(1);
-	}
+
 	
 }
 
@@ -145,11 +139,7 @@ void Student::set_appID(int IDnum)
 {
 	appID = IDnum;
 	
-	if ((appID < 20200000) || (appID > 20210000))
-	{
-		cout << "Error: Invalid Application ID. Exiting program";
-		exit(1);
-	}
+
 	
 }
 

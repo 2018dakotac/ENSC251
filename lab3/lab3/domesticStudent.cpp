@@ -13,14 +13,9 @@ DomesticStudent::DomesticStudent(string FN, string LN, float gradept, int resear
 	set_cgpa(gradept);
 	set_researchscore(research);
 	set_appID(ID);
-	province = prov;
+	set_province(prov);
 	//province error check
 
-	if (province != "BC" && province != "AB" && province != "NS" &&  province != "NU" &&  province != "ON" &&  province != "PE" &&  province != "QC" &&  province != "SK" &&  province != "YT" && province != "MB" && province != "NB" && province != "NL" && province != "NT")
-	{
-		cout << "Error: Invalid province. Exiting Program.";
-		exit(-1);
-	}
 	errorcheck();//calling the error check function to ensure the initialized values are valid. The error checking function
    //is in parent class Student
 }
@@ -40,15 +35,17 @@ DomesticStudent::DomesticStudent()
 //mutator/set function for the varibale province of domestic student, with errror checking included
 void DomesticStudent::set_province(string provi)
 {
+	//make province capital for easier comparison and aesthetic... 
+	for (int i = 0; i < provi.size(); i++) if (provi[i] >= 'a' && provi[i] <= 'z') provi[i] -= ('a' - 'A');
 	province = provi;
+
 	//checking province entered is valid pair of letters
-	/*
 	if (province != "BC" && province != "AB" && province != "NS" && province != "NU" && province != "ON" && province != "PE" && province != "QC" && province != "SK" && province != "YT" &&  province != "MB" &&  province != "NB" &&  province != "NL" && province != "NT")
 	{
 		cout << "Error: Invalid province. Exiting Program.";
 		exit(-1);
 	}
-	*/
+	
 }
 
 //accessor/get function for the province variable
