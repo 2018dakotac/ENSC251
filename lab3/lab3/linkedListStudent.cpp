@@ -291,16 +291,18 @@ void frontBackSplit(StudentList*sourceNode, StudentList**frontRef, StudentList**
 void tailNodeFinder(StudentList **headNode, StudentList **tailNode) {
 	//goes through linked list to get tail node pointer
 	StudentList *tempPtr = *headNode;
-	if (tempPtr == NULL) {//base case that there one or no nodes
+
+	if (tempPtr == NULL|| tempPtr->nextNode == NULL) {//base case that there one or no nodes
 		*tailNode = *headNode;
 	}
-
-	while (tempPtr != NULL) {
-		tempPtr = tempPtr->nextNode;
-		if (tempPtr->nextNode == NULL) {
-			*tailNode = tempPtr;
-			//this breaks the loop so tempPtr points the the last node that points to null
-			break;
+	else {
+		while (tempPtr != NULL) {
+			tempPtr = tempPtr->nextNode;
+			if (tempPtr->nextNode == NULL) {
+				*tailNode = tempPtr;
+				//this breaks the loop so tempPtr points the the last node that points to null
+				break;
+			}
 		}
 	}
 }
@@ -310,7 +312,7 @@ void printLinkedList(StudentList**headNode) {
 	DomesticStudent blankDomesticStudent;
 	InternationalStudent blankInternationalStudent;
 	if (tempPtr == NULL) {//base case that there one or no nodes
-		cout << "Linked list is empy..." << endl;
+		cout << "Linked list is empty...can't print" << endl;
 	}
 	while (tempPtr != NULL) {//compares determins node type and prints object
 		if (tempPtr->domStudent == blankDomesticStudent) {
@@ -456,74 +458,76 @@ void deleteByName(StudentList**headNode, string firstName, string lastName) {
 		free(tempPtr);//free memory
 		cout << "Linked list is now empty."<< endl;
 	}
-	while (tempPtr != NULL) {//compares determins node type and prints object
+	else {
+		while (tempPtr != NULL) {//compares determins node type and prints object
 
-		if (tempPtr->domStudent == blankDomesticStudent) {
-			string temp1, temp2;
-			temp1 = tempPtr->intStudent.get_firstname();
-			temp2 = tempPtr->intStudent.get_lastname();
-			for (int i = 0; i < temp1.size(); i++) if (temp1[i] >= 'a' && temp1[i] <= 'z') temp1[i] -= ('a' - 'A');
-			for (int i = 0; i < temp2.size(); i++) if (temp2[i] >= 'a' && temp2[i] <= 'z') temp2[i] -= ('a' - 'A');
-			if (temp1 == firstName && temp2 == lastName) {
-				
-				char check = 'x';
-				cout << "Do you want to delete " <<endl<< tempPtr->intStudent << endl << "Enter 'N' if you don't or any char if you do." << endl;
-				cin >> check;
-				if (check != 'N' && check != 'n') {
-					cout << "Student has been Deleted" << endl;
-					if (tempPtr->nextNode == NULL) {// if its the last node
-						previousNode->nextNode = NULL;
-						free(tempPtr);//free memory
-						break;
+			if (tempPtr->domStudent == blankDomesticStudent) {
+				string temp1, temp2;
+				temp1 = tempPtr->intStudent.get_firstname();
+				temp2 = tempPtr->intStudent.get_lastname();
+				for (int i = 0; i < temp1.size(); i++) if (temp1[i] >= 'a' && temp1[i] <= 'z') temp1[i] -= ('a' - 'A');
+				for (int i = 0; i < temp2.size(); i++) if (temp2[i] >= 'a' && temp2[i] <= 'z') temp2[i] -= ('a' - 'A');
+				if (temp1 == firstName && temp2 == lastName) {
+
+					char check = 'x';
+					cout << "Do you want to delete " << endl << tempPtr->intStudent << endl << "Enter 'N' if you don't or any char if you do." << endl;
+					cin >> check;
+					if (check != 'N' && check != 'n') {
+						cout << "Student has been Deleted" << endl;
+						if (tempPtr->nextNode == NULL) {// if its the last node
+							previousNode->nextNode = NULL;
+							free(tempPtr);//free memory
+							break;
+						}
+						previousNode->nextNode = tempPtr->nextNode;
+						StudentList*deletedNode = tempPtr;
+						tempPtr = previousNode->nextNode;
+						free(deletedNode);//free memory
+						continue;
 					}
-					previousNode->nextNode = tempPtr->nextNode;
-					StudentList*deletedNode = tempPtr;
-					tempPtr = previousNode->nextNode;
-					free(deletedNode);//free memory
-					continue;
 				}
+
 			}
+			else if (tempPtr->intStudent == blankInternationalStudent) {
+				string temp1, temp2;
+				temp1 = tempPtr->domStudent.get_firstname();
+				temp2 = tempPtr->domStudent.get_lastname();
+				for (int i = 0; i < temp1.size(); i++) if (temp1[i] >= 'a' && temp1[i] <= 'z') temp1[i] -= ('a' - 'A');
+				for (int i = 0; i < temp2.size(); i++) if (temp2[i] >= 'a' && temp2[i] <= 'z') temp2[i] -= ('a' - 'A');
+				if (temp1 == firstName && temp2 == lastName) {
+					char check = 'x';
+					cout << "Do you want to delete " << endl << tempPtr->domStudent << endl << "Enter 'N' if you don't or any char if you do." << endl;
+					cin >> check;
+					if (check != 'N' && check != 'n') {
+						cout << "Student has been Deleted" << endl;
+						if (tempPtr->nextNode == NULL) {//checks if its the last node
+							previousNode->nextNode = NULL;
+							free(tempPtr);//free memory
+							break;
+						}
+						previousNode->nextNode = tempPtr->nextNode;
+						StudentList*deletedNode = tempPtr;
+						tempPtr = previousNode->nextNode;
+						free(deletedNode);//free memory
+						continue;
+					}
+				}
+
+			}
+			previousNode = tempPtr;
+			tempPtr = tempPtr->nextNode;
 
 		}
-		else if (tempPtr->intStudent == blankInternationalStudent) {
-			string temp1, temp2;
-			temp1 = tempPtr->domStudent.get_firstname();
-			temp2 = tempPtr->domStudent.get_lastname();
-			for (int i = 0; i < temp1.size(); i++) if (temp1[i] >= 'a' && temp1[i] <= 'z') temp1[i] -= ('a' - 'A');
-			for (int i = 0; i < temp2.size(); i++) if (temp2[i] >= 'a' && temp2[i] <= 'z') temp2[i] -= ('a' - 'A');
-			if (temp1 == firstName && temp2 == lastName) {
-				char check = 'x';
-				cout << "Do you want to delete " <<endl<< tempPtr->domStudent << endl << "Enter 'N' if you don't or any char if you do." << endl;
-				cin >> check;
-				if (check != 'N' && check != 'n') {
-					cout << "Student has been Deleted"<< endl;
-					if (tempPtr->nextNode == NULL) {//checks if its the last node
-						previousNode->nextNode = NULL;
-						free(tempPtr);//free memory
-						break;
-					}
-					previousNode->nextNode = tempPtr->nextNode;
-					StudentList*deletedNode = tempPtr;
-					tempPtr = previousNode->nextNode;
-					free(deletedNode);//free memory
-					continue;
-				}
-			}
-
-		}
-		previousNode = tempPtr;
-		tempPtr = tempPtr->nextNode;
-
 	}
 }
 void specialDelete(StudentList**headNode, StudentList **tailNode) {
 	StudentList *tempPtr = *headNode;
 	if (*headNode == NULL) {//base case that there one or no nodes
-		cout << "Error can't special delete empty list. Exiting program" << endl;
-		exit(1);
+		cout << "Error can't special delete empty list." << endl;
+		//exit(1);
 	}
 	//if there is only one node
-	if (tempPtr->nextNode == NULL) {//checks if there is only one node
+	else if (tempPtr->nextNode == NULL) {//checks if there is only one node
 		*headNode = NULL;
 		*tailNode = NULL;
 		free(tempPtr);//free memory
