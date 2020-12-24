@@ -1,3 +1,2 @@
-# ENSC251
-Student Application Sorter
-Written for linux based OS in C++ with a command line interface
+# Student Application Sorter
+Written for ENSC 251 in a linux based OS with C++ through the command line 
